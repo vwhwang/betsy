@@ -14,14 +14,22 @@
     
     <header class="app-header__header">
     <h1>
-    Momasky
+    Momasy
     </h1>
     
     <nav class="app-header__nav">
       <ul class="nav app-header__site-nav-container">  
-        <li class="nav-item app-header__nav_item"><%=link_to "View All Art", root_path%></li> |  
-        <li class="nav-item app-header__nav_item"><%=link_to "View All Merchants", root_path%></li> |
-        <li class="nav-item app-header__nav_item"><%=link_to "Merchant Login", root_path%></li> |
+        <li class="nav-item app-header__nav_item"><%=link_to "View All Art", products_path%></li> |  
+        <li class="nav-item app-header__nav_item"><%=link_to "View All Merchants", merchants_path%></li> 
+      </ul>
+
+      <ul class="nav app-header__user-nav-container">
+        <% if session[:merchant_id]%>
+          <%# <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", merchant_path(session[:merchant_id]), method: :get, class: "btn btn-custom" %></li> %>
+          <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :post, class: "btn btn-custom"%></li>
+        <%else%>
+          </li class="nav-item app-header__nav_item"><%=button_to "Merchant Login", github_login_path, method: :get, class: "btn btn-custom"%></li>
+        <%end%>
       </ul>
     </nav>
     </header>
