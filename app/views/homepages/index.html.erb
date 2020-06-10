@@ -2,4 +2,20 @@
   <section>
     <h2>Homepage Stuffssss</h2>
   </section>
+  <section class="sidebar">
+    <ul class="list-group">
+      <li class="list-group-item"><%=link_to "Browse Art by Merchant", merchants_path%></li>
+      <li class="list-group-item"><%=link_to "Browse Art by Category", root_path%></li>
+    <ul>
+  </section>
+  <section class="main">
+    <ul class="list-group">
+      <%@products.each do |product|%>
+        <li class="list-group-item">
+          <%=product.name%>
+          <%=product.price%>
+        </li>
+      <%end%>
+    </ul>
+  </section>
 </div>

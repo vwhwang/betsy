@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Momasky</title>
+    <title>Momasy</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,8 +13,8 @@
   <body>
     
     <header class="app-header__header">
-    <h1>
-    Momasy
+    <h1 class="app-header__title">
+      <%=link_to "Momasy", root_path%>
     </h1>
     
     <nav class="app-header__nav">
@@ -25,7 +25,7 @@
 
       <ul class="nav app-header__user-nav-container">
         <% if session[:merchant_id]%>
-          <%# <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", merchant_path(session[:merchant_id]), method: :get, class: "btn btn-custom" %></li> %>
+          <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", merchant_path(session[:merchant_id]), method: :get, class: "btn btn-custom"%></li>
           <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :post, class: "btn btn-custom"%></li>
         <%else%>
           </li class="nav-item app-header__nav_item"><%=button_to "Merchant Login", github_login_path, method: :get, class: "btn btn-custom"%></li>
@@ -33,7 +33,6 @@
       </ul>
     </nav>
     </header>
-
 
 
     <section class="flash">
@@ -48,6 +47,12 @@
     <section class="container-fluid m5">
     <%= yield %>
     </section>
+
+
+    <footer class="app-footer__footer">
+      About Momasy
+    </footer>
+
   </body>
 </html>
 

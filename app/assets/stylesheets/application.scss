@@ -17,13 +17,24 @@
 
 @import "**/*";
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.app-header__title a {
+  color:olive;
+}
+
 .app-header__header {
   background-color: #eeeeee;
   color: olive;
-  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0.5rem;
+  padding: 2rem 1rem 0.5rem 1rem;
 }
-.app-header__site-nav-container{
 
+.app-header__site-nav-container .nav-item{
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 a {
@@ -39,3 +50,68 @@ a:hover {
   color:olive;
 }
 
+.btn-custom {
+  background-color: olive;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.app-header__nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sidebar {
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 55px;
+  // list-style-type: square;
+  // list-style-position: inside;
+  // height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  // position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #eeeeee;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+ul {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.list-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: -1px;
+  border: none;
+}
+
+.app-footer__footer {
+  background-color: #eeeeee;
+  color: olive;
+  margin-bottom: 0.5rem;
+  padding: 2rem 1rem 0.5rem 1rem;
+  text-align: center;
+}
