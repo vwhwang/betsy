@@ -16,3 +16,26 @@
 @import "bootstrap";
 
 @import "**/*";
+
+.app-header__header {
+  background-color: #eeeeee;
+  color: olive;
+  font-family: 'Montserrat', sans-serif;
+}
+.app-header__site-nav-container{
+
+}
+
+a {
+  color: black;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color:olive;
+}
+

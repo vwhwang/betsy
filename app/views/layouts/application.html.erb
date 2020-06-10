@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>Momasky</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    
+    <header class="app-header__header">
+    <h1>
+    Momasky
+    </h1>
+    
+    <nav class="app-header__nav">
+      <ul class="nav app-header__site-nav-container">  
+        <li class="nav-item app-header__nav_item"><%=link_to "View All Art", root_path%></li> |  
+        <li class="nav-item app-header__nav_item"><%=link_to "View All Merchants", root_path%></li> |
+        <li class="nav-item app-header__nav_item"><%=link_to "Merchant Login", root_path%></li> |
+      </ul>
+    </nav>
+    </header>
+
+
+
+    <section class="flash">
+      <%flash.each do |name, message|%>
+        <div class="<%name%>">
+          <%=message%>
+        </div>
+      <%end%>
+    </section>
+    
+
+    <section class="container-fluid m5">
     <%= yield %>
+    </section>
   </body>
 </html>
+
