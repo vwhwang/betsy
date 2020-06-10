@@ -1,0 +1,38 @@
+<main>
+  <h2>User Summary: <%= @merchant.username %></h2>
+  <p>Joined site: <%= @merchant.created_at.strftime("%b %d, %Y") %></p>
+  
+  <h2>Dashboard </h2>
+  <section class="merchant-products__container">
+
+    <h3 class="merchant-products__header">Products</h3>
+    <table class="table">
+      <thead class="thead-table">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Inventory</th>
+          <th>Category</th>
+          <th>Created at</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% Product.where(merchant_id: @merchant.id).each do |product| %>
+        <tr>
+          <td><%= link_to product.name %></td>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><%= product.category %></td>
+          <td><%= product.created_at.strftime("%b %d, %Y") %></td>
+          <%# TODO Add the links to edit and delete a product %>
+          <td><%= link_to "Edit Product", class: "btn btn-primary", method: :post %></td>
+          <td><%= link_to "Delete Product", class: "btn btn-primary", method: :delete %></td>
+        <tr>
+      <% end %>
+      </tbody>
+    </table>
+</section>
+
+</main>
