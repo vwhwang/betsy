@@ -10,7 +10,7 @@
 
 require 'csv'
 
-PRODUCT_FILE = Rails.root.join('db','products-seeds.csv',)
+PRODUCT_FILE = Rails.root.join('db','products-seeds3.csv',)
 
 product_failures = []
 CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
@@ -19,13 +19,14 @@ CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
   product.name = row['name']
   product.price = row['price']
   product.inventory = row['inventory']
-  product.category = row['category']
+  product.image = row['image']
+  product.artist = row['artist']
   product.merchant_id = row['merchant_id']
   successful = product.save
 
   if !successful
     product_failures << product 
-    puts "Failed to save product: #{work.inspect}"
+    puts "Failed to save product: #{product.inspect}"
   else   
     puts "Created product: #{product.inspect}"
   end 
