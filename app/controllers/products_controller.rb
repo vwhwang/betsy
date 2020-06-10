@@ -1,6 +1,18 @@
 class ProductsController < ApplicationController
-  categories = ["painting", "sculpture", "mixed media", "portrait"]
+  def index 
+    @products = Product.all
+  end 
 
+  def show 
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id)
+
+    if @product.nil?
+      redirect_to products_path
+      return 
+    end 
+  end 
+  
   def new
     @product = Product.new
   end
@@ -23,5 +35,5 @@ class ProductsController < ApplicationController
   def product_params
     return params.require(:product).permit(:name, :price, :inventory, :category, :merchant_id)
   end
-
+  
 end
