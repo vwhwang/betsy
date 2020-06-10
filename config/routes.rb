@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   resources :merchants
 
+  resources :products do
+    resources :order_items, only: [:index, :new]
+  end
 end
