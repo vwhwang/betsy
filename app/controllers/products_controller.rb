@@ -16,7 +16,9 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     if !session[:merchant_id]
-      flash.now[:error] = "You must be logged in to create a product"
+      flash[:error] = "You must be logged in to create a product"
+      redirect_to root_path
+      return
     end
   end
 
@@ -29,12 +31,14 @@ class ProductsController < ApplicationController
         redirect_to product_path(@product.id)
         return
       else
-        flash.now[:error] = "Something happened. #{@product.name} was not added."
+        flash.now[:error] = "Something happened. #{@product.name} was not added to the product database"
         render :new, status: :bad_request
         return
       end
     else
       flash.now[:error] = "You must be logged in to create a product"
+      redirect_to root_path
+      return
     end
   end
 
