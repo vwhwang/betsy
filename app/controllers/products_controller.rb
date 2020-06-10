@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  categories = ["painting", "sculpture", "mixed media", "portrait"]
+
   def new
     @product = Product.new
   end
@@ -6,7 +8,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params) 
     if @product.save 
-      flash[:success] = "#{@product.name} has been added to the product databse"
+      flash[:success] = "#{@product.name} has been added to the product database"
       redirect_to product_path(@product.id)
       return
     else
