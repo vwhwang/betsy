@@ -6,3 +6,23 @@
 <% else %>
   <%= link_to "Login with Github", github_login_path %>
 <% end %>
+
+<h2>List of Merchants</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Joined</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @merchants.each do |merchant| %>
+      <tr>
+        <td><%= link_to merchant.username, merchant_path(merchant) %></td>
+        <td><%= merchant.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back to All products List", class: "btn btn-secondary" %>
