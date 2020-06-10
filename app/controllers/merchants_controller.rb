@@ -24,6 +24,7 @@ class MerchantsController < ApplicationController
         flash[:success] = "Logged in as: #{merchant.username}"
       else
         flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
+        # TODO Later on change the merchants path for the root path
         return redirect_to root_path
       end
     end
@@ -40,5 +41,15 @@ class MerchantsController < ApplicationController
     flash[:success] = "Successfully logged out!"
 
     redirect_to merchants_path
+  end
+
+  def current
+    @merchant = Merchant.find_by(id: session[:merchant_id])
+    if @merchant.nil?
+      # I have to be logged in!
+      flash[:error] = "You must be logged in to view this page"
+      redirect_to current_merchant_path
+      return
+    end
   end
 end
