@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
       head :not_found 
       return 
     elsif @product.update(product_params)
-      flash[:success] = "Successfully updated product #{product.name}"
+      flash[:success] = "Successfully updated product #{@product.name}"
       redirect_to product_path(@product.id)
       return 
     else  
@@ -72,10 +72,28 @@ class ProductsController < ApplicationController
 
 
 
+  def destroy 
+    # currently anyone can delete work 
+    @product = Product.find_by(id: params[:id])
+
+    if @product.nil?
+      head :not_found
+      return
+    else   
+      @product.destroy
+      flash[:success] = "Art deleted"
+      redirect_to products_path
+      return 
+    end 
+  end 
+
+
+
+
   private
 
   def product_params
-    return params.require(:product).permit(:name, :price, :inventory, :category, :merchant_id)
+    return params.require(:product).permit(:name, :price, :inventory, :merchant_id, category_ids:[])
   end
   
 end

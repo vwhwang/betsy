@@ -25,11 +25,11 @@
   </div>
 
   <div class="form-group">
-      <%= f.label :category %>
-      <%= f.select :category, ["painting", "sculpture", "mixed media", "portrait"], class: "form-control" %>
+    <%= f.label :categories %>
+    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
   </div>
 
   <div class="form-group">
-      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <%= f.submit "#{action_name} Art", class: "btn btn-primary" %>
   </div>
 <% end %>
