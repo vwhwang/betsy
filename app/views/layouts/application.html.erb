@@ -13,13 +13,14 @@
   <body>
     
     <header class="app-header__header">
-    <h1 class="app-header__title">
-      <%=link_to "Momasy", root_path%>
+    <h1>
+      <%=link_to "Momasy", root_path, :class => "app-header__title"%>
     </h1>
     
     <nav class="app-header__nav">
       <ul class="nav app-header__site-nav-container">  
-        <li class="nav-item app-header__nav_item"><%=link_to "View All Art", products_path%></li> |  
+        <li class="nav-item app-header__nav_item"><%=link_to "View All Art", products_path%></li>
+        <li class="nav-item app-header__nav_item">|</li>
         <li class="nav-item app-header__nav_item"><%=link_to "View All Merchants", merchants_path%></li> 
       </ul>
 
@@ -27,12 +28,44 @@
         <% if session[:merchant_id]%>
           <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", merchant_path(session[:merchant_id]), method: :get, class: "btn btn-custom"%></li>
           <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
+
         <%else%>
           </li class="nav-item app-header__nav_item"><%=button_to "Merchant Login", github_login_path, method: :get, class: "btn btn-custom"%></li>
         <%end%>
       </ul>
     </nav>
     </header>
+
+      </section>
+      
+  <section class="sidebar">
+    <div class="btn-group pull-right right-nav">
+      <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="carat"></span>
+        <span clas="sr-only">Browse by Merchant</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @merchants.each do |merchant|%>
+          <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
+        <%end%>
+      <ul>
+    </div>
+  
+    <div class="btn-group pull-right right-nav">
+      <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="carat"></span>
+        <span clas="sr-only">Browse by Category</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @merchants.each do |merchant|%>
+          <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
+        <%end%>
+      <ul>
+    </div>
+
+
+  
+  </section>
 
 
     <section class="flash">
@@ -44,7 +77,7 @@
     </section>
     
 
-    <section class="container-fluid m5">
+    <section class="main container-fluid m5">
     <%= yield %>
     </section>
 
@@ -54,5 +87,6 @@
     </footer>
 
   </body>
+
 </html>
 
