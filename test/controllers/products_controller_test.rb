@@ -33,6 +33,7 @@ describe ProductsController do
           price: 5.55,
           inventory: 5,
           category: "a category",
+          merchant_id: merchants(:merchant_1).id
         },
       }
       

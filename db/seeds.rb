@@ -10,6 +10,12 @@
 
 require 'csv'
 
+Merchant.create(username: "vickibot", email:"vicki@bot.com")
+
+puts "Created #{Merchant.count} merchant"
+
+
+
 PRODUCT_FILE = Rails.root.join('db','products-seeds3.csv',)
 
 product_failures = []
@@ -64,3 +70,4 @@ categories.each do |category|
 end
 
 puts "Created #{count} categories"
+
