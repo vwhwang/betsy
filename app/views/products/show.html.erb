@@ -2,3 +2,4 @@
 <p>Art Name:<%= @product.name %></p>
 <p>Price:$ <%= @product.price %></p>
 <p>Inventory<%= @product.inventory %></p>
+<p><%= link_to "Add to cart", product_order_items_path(@product.id), class: "btn btn-primary", method: :post %></p>
