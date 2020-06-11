@@ -1,0 +1,4 @@
+<% if session[:merchant_id]%>
+    <h3>Update Product</h3>
+    <%= render partial: "form" ,locals: {action_name: "Update"}%>
+<% end %>
