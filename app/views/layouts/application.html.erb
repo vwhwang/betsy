@@ -49,12 +49,20 @@
         <%end%>
       <ul>
     </div>
+  
+    <div class="btn-group pull-right right-nav">
+      <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="carat"></span>
+        <span clas="sr-only">Browse by Category</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @merchants.each do |merchant|%>
+          <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
+        <%end%>
+      <ul>
+    </div>
 
 
-    <ul class="list-group">
-      <li class="list-group-item"><%=link_to "Browse Art by Merchant", merchants_path%></li>
-      <li class="list-group-item"><%=link_to "Browse Art by Category", root_path%></li>
-    <ul>
   
   </section>
 
@@ -73,11 +81,11 @@
     </section>
 
 
-   
-
-  </body>
-   <footer class="app-footer__footer">
+    <footer class="app-footer__footer">
       About Momasy
     </footer>
+
+  </body>
+
 </html>
 
