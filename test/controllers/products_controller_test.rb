@@ -12,9 +12,7 @@ describe ProductsController do
   end
 
   describe "create" do
-    it "can create a new product with valid information accurately, and redirect" do
-      merchant = Merchant.create(username: "bob")
-      
+    it "can create a new product with valid information accurately, and redirect" do      
       # Arrange
       product_hash = {
         product: {
@@ -22,7 +20,7 @@ describe ProductsController do
           price: 5.55,
           inventory: 5,
           category: "a category",
-          merchant_id: merchant.id
+          merchant_id: merchants(:merchant_1).id
         },
       }
       
