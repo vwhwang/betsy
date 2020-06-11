@@ -6,6 +6,7 @@
     <table class="table">
       <thead class="thead-table">
         <tr>
+          <th># Order</th>
           <th>Product Name</th>
           <th>Price</th>
           <th>Quantity</th>
@@ -14,9 +15,11 @@
         </tr>
       </thead>
       <tbody>
-      <% @order_items.each do |item| %>
+      
+      <% @order_products.each do |item| %>
         <% product = Product.find_by(id: item.product_id)%>
         <tr>
+          <td><%= item.order_id %></td>
           <td><%= link_to item.product.name, product_path(item.product.id)%></td>
           <td><%= item.product.price %></td>
           <td><%= item.quantity %></td>
