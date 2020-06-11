@@ -3,6 +3,9 @@
 <p>Price:$ <%= @product.price %></p>
 <p>Inventory<%= @product.inventory %></p>
 
+<p><%= link_to "Add to cart", product_order_items_path(@product.id), class: "btn btn-primary", method: :post %></p>
+
+
 
 
 
@@ -12,3 +15,4 @@
 
 
 <%= link_to "Delete", product_path(@product.id) ,method: :delete, data: { confirm: "Are you sure you want to delete this product?"} ,class:"btn btn-danger"%>
+
