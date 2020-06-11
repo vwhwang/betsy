@@ -1,13 +1,31 @@
 <div class='homepage'>
   <section>
-    <h2>Homepage Stuffssss</h2>
+    
   </section>
   <section class="sidebar">
+    <div class="btn-group pull-right right-nav">
+      <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="carat"></span>
+        <span clas="sr-only">Browse by Merchant</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @merchants.each do |merchant|%>
+          <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
+        <%end%>
+      <ul>
+    </div>
+
+
     <ul class="list-group">
       <li class="list-group-item"><%=link_to "Browse Art by Merchant", merchants_path%></li>
       <li class="list-group-item"><%=link_to "Browse Art by Category", root_path%></li>
     <ul>
+  
   </section>
+
+
+
+
   <section class="main">
     <ul class="list-group">
       <%@products.each do |product|%>
