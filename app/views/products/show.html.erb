@@ -1,4 +1,28 @@
-<h1>Product detail page</h1>
-<p>Art Name:<%= @product.name %></p>
-<p>Price:$ <%= @product.price %></p>
-<p>Inventory<%= @product.inventory %></p>
+<div class="product container">
+  <h1><%= @product.name %></h1>
+  <p><%= link_to "Back to all products", products_path, class: "products__all" %></p>
+  <div class="row">
+    <section class="col-8 product__image">
+      <div class="">
+        <% if @product.image %>
+          <%= image_tag(@product.image, class: "img-fluid") %>
+        <% else %>
+          <%= image_tag('https://www.colonialkc.org/wp-content/uploads/2015/07/Placeholder.png') %>
+        <% end %>
+      </div>
+    </section>
+
+    <section class="col product__info">
+      <h2><%= @product.name %></h2>
+      <h3><%= @product.artist %></h3>
+      <% if @product.inventory <= 3 %>
+        <p class="product__limited">Limited stock!</p>
+        <p>Only <%= @product.inventory %> left</p>
+      <% else %>
+        <p><%= @product.inventory %> available</p>
+      <% end %>
+      <p>Price: $<%= @product.price %></p>
+      <%= link_to "Add to cart", products_path, class: "btn btn-primary" %>
+    </section>
+  </div>
+</div>
