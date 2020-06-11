@@ -11,12 +11,6 @@ class OrderItemsController < ApplicationController
       return head :not_found
     end
 
-    order_items = {
-      product_id: params[:product_id].to_i,
-      quantity: params[:quantity].to_i,
-      order_id: session[:order_id],
-    }
-
     if session[:order_id].nil?
       # creates a new order if one doesn't exist
       @order = Order.create
@@ -34,7 +28,7 @@ class OrderItemsController < ApplicationController
         current_item[:quantity] += 1
         current_item.save
         flash[:success] = "Successfully updated order item"
-        redirect_to product_path(@product.id)
+        redirect_to order_path(@order_id)
         return
       end
     end
@@ -44,18 +38,21 @@ class OrderItemsController < ApplicationController
     #   redirect_to product_path(@product.id)
     #   return
     # end
-
-    order_item = OrderItem.new(order_items)
+    order_item = OrderItem.new({
+      product_id: params[:product_id],
+      quantity: params[:quantity].to_i,
+      order_id: session[:order_id],
+    })
 
     if order_item.save
       flash[:success] = "Item added to order"
       if session[:order_id].nil?
         session[:order_id] = order_item.order_id
       end
-      redirect_to product_path(order_item.product_id)
+      redirect_to order_path(@order_id)
     else
       flash[:error] = "Could not add item to order"
-      redirect_to products_path
+      redirect_to order_path(@order_id)
     end
   end
 
