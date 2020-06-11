@@ -17,7 +17,7 @@ class OrderItem < ApplicationRecord
     order_items = OrderItem.all
     
     items_list = order_items.select do |item|
-      OrderItem.find_by(order_id: id)
+      item.order_id == id
     end
 
     return items_list
