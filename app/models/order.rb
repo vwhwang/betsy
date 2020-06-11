@@ -1,40 +1,17 @@
 class Order < ApplicationRecord
   has_many :order_items
 
-  # create_table "orders", force: :cascade do |t|
-  #   t.string "name"
-  #   t.string "email"
-  #   t.string "address"
-  #   t.integer "credit_card"
-  #   t.date "credit_card_exp"
-  #   t.datetime "created_at", precision: 6, null: false
-  #   t.datetime "updated_at", precision: 6, null: false
-  #    t.string "status"
-  # end
-
-
-  # Purchasing an order makes the following changes:
-
   def order_purchase
-  #   Reduces the number of inventory for each product 
-    # loop through order items
-    p self.order_items
-      
-      self.order_items.each do |item|
-      # find product - 
-        product = Product.find_by(id: item.product_id)
-        p "product.inventory before = #{product.inventory}"
-      # inventory -= quantity of the order item
-        p "item.quantity = #{item.quantity}"
-        product.inventory -= (item.quantity)
-        product.save
-        p "product.inventory after = #{product.inventory}"
-      end
+  # Reduces the number of inventory for each product 
+    self.order_items.each do |item|
+      product = item.product
+      product.inventory -= (item.quantity)
+      product.save!
+    end
 
-  #   Changes the order state from "pending" to "paid"
-      self.status = "paid"
-      self.save
-      
+  # Changes the order state from "pending" to "paid"
+    self.status = "paid"
+    self.save
   end
 
   def clear_cart
