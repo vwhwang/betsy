@@ -9,11 +9,12 @@ Rails.application.routes.draw do
 
   resources :merchants
 
+  resources :products
+  resources :orders
+
   resources :products do
-    resources :order_items, only: [:index, :new]
+    resources :order_items, only: [:index, :new, :create]
   end
   
-  resources :products
-
 end
 
