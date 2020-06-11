@@ -10,7 +10,13 @@
 
 require 'csv'
 
-PRODUCT_FILE = Rails.root.join('db','products-seeds.csv',)
+Merchant.create(username: "vickibot", email:"vicki@bot.com")
+
+puts "Created #{Merchant.count} merchant"
+
+
+
+PRODUCT_FILE = Rails.root.join('db','products-seeds3.csv',)
 
 product_failures = []
 CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
@@ -19,7 +25,8 @@ CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
   product.name = row['name']
   product.price = row['price']
   product.inventory = row['inventory']
-  product.category = row['category']
+  product.image = row['image']
+  product.artist = row['artist']
   product.merchant_id = row['merchant_id']
   successful = product.save
 
@@ -34,3 +41,33 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
+
+
+
+categories = [
+  {
+    name: "Abstract"
+  },
+  {
+    name: "Realism"
+  },  
+  {
+    name: "Surrealism"
+  },  
+  {
+    name: "Pop Art"
+  },  
+  {
+    name: "Sculpture"
+  },  
+]
+
+count = 0
+categories.each do |category|
+  if Category.create(category)
+    count += 1
+  end
+end
+
+puts "Created #{count} categories"
+

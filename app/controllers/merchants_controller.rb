@@ -24,23 +24,23 @@ class MerchantsController < ApplicationController
         flash[:success] = "Logged in as: #{merchant.username}"
       else
         flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
-        # TODO Later on change the merchants path for the root path
+        
         return redirect_to root_path
       end
     end
 
     # If we get here, we have a valid merchant instance
-    # TODO Later on change the merchants path for the root path
+
     session[:merchant_id] = merchant.id
-    return redirect_to merchants_path
+    return redirect_to root_path
   end
 
-  # TODO Later on change the merchants path for the root path
+
   def destroy
     session[:merchant_id] = nil
     flash[:success] = "Successfully logged out!"
 
-    redirect_to merchants_path
+    redirect_to root_path
   end
 
   def current

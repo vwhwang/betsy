@@ -48,7 +48,7 @@ describe Merchant do
       merchant1 = merchants(:merchant_2)
       expect(merchant1).must_respond_to :products
       merchant1.products.each do |product|
-        expect(products).must_be_kind_of product
+        expect(product).must_be_kind_of Product
       end
     end
   end

@@ -8,8 +8,16 @@ Rails.application.routes.draw do
   get "/merchants/current", to: "merchants#current", as: "current_merchant"
 
   resources :merchants
-
   resources :products
 
+  resources :orders
+
+  
+
+
+  resources :products do
+    resources :order_items, only: [:index, :new, :create]
+  end
+  
 end
 
