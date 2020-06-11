@@ -1,8 +1,15 @@
 <h1>all products</h1>
-<ul>
+
   <% @products.each do |product| %>
-    <li> <%=link_to product.name, product_path(product.id) %></li>
-    <li> price:<%=product.price %></li>
+  <ul>
+    <li> <%=link_to product.name , product_path(product.id) %></li>
+    <li> Price:$ <%=product.price %></li>
+
+    <% if product.image == nil  %>
+      <li> <%= image_tag  "art.jpg" , alt:"pic"%></li>
+    <% else %>
+      <li> <%= image_tag  product.image, alt:"pic"%></li>
+   <% end  %>
+  </ul>
   <% end  %>
 
-</ul>
