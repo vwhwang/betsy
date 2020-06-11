@@ -1,4 +1,5 @@
 product_1:
+  id: 1
   name: starry night
   price: 7546.54
   inventory: 1
@@ -6,23 +7,26 @@ product_1:
   # artist: van gogh
   merchant_id: 1
 product_2:
+  id: 2
   name: water lilies
   price: 436.54
-  inventory: 1
+  inventory: 8
   # image: img
   # artist: claude monet
   merchant_id: 2
 product_3:
+  id: 3
   name: mona lisa
   price: 12345.54
-  inventory: 1
+  inventory: 45
   # image: img
   # artist: leonardo da vinci
   merchant_id: 1
 product_4:
+  id: 4
   name: the scream
   price: 643.54
-  inventory: 1
+  inventory: 2
   # image: img
   # artist: leonardo da vinci
   merchant_id: 2

@@ -2,23 +2,23 @@ order_1:
   name: jessica
   email: jessica@jessica.jessica
   address: 1234 road
-  credit_card: 123456789
+  credit_card: 33
   credit_card_exp: 02/33
 order_2:
   name: stephanie
   email: stephanie@stephanie.stephanie
   address: 4567 road
-  credit_card: 123456789
+  credit_card: 44
   credit_card_exp: 06/33
 order_3:
   name: vicki
   email: vicki@vicki.vicki
   address: 3546 street
-  credit_card: 2345612345
+  credit_card: 55
   credit_card_exp: 11/27
 order_4:
   name: vera
   email: vera@vera.vera
   address: 6537 ave
-  credit_card: 0987665433
+  credit_card: 12
   credit_card_exp: 10/32

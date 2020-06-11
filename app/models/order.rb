@@ -18,13 +18,17 @@ class Order < ApplicationRecord
   def order_purchase
   #   Reduces the number of inventory for each product 
     # loop through order items
+    p self.order_items
       
       self.order_items.each do |item|
       # find product - 
         product = Product.find_by(id: item.product_id)
+        p "product.inventory before = #{product.inventory}"
       # inventory -= quantity of the order item
+        p "item.quantity = #{item.quantity}"
         product.inventory -= (item.quantity)
         product.save
+        p "product.inventory after = #{product.inventory}"
       end
 
   #   Changes the order state from "pending" to "paid"
