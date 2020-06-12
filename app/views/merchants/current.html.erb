@@ -1,7 +1,7 @@
 <main>
   <h2>User Summary: <%= @merchant.username %></h2>
   <p>Joined site: <%= @merchant.created_at.strftime("%b %d, %Y") %></p>
-  
+  <p><%= link_to "Add New Product",new_product_path, class: "btn btn-primary" %></p>
   <h2>Dashboard </h2>
   <section class="merchant-products__container">
 
