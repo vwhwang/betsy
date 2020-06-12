@@ -6,6 +6,11 @@
         <li class="list-group-item">
           <%=product.name%>
           <%=product.price%>
+          <% if product.image == nil  %>
+            <p> <%= image_tag  "art.jpg" , alt:"pic"%></p>
+          <% else %>
+            <p> <%= image_tag  product.image, alt:"pic"%></p>
+          <% end  %>
         </li>
       <%end%>
     </ul>
