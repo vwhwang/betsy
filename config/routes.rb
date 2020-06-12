@@ -8,8 +8,19 @@ Rails.application.routes.draw do
   get "/merchants/current", to: "merchants#current", as: "current_merchant"
 
   resources :merchants
-
   resources :products
 
+  resources :orders
+
+  # TODO: implement empty cart route
+  # patch "orders/:id", to: "orders#empty_cart", as: "empty_cart"
+
+  
+
+
+  resources :products do
+    resources :order_items, only: [:index, :new, :create]
+  end
+  
 end
 

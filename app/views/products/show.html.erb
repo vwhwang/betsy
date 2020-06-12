@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="product container">
   <h1><%= @product.name %></h1>
   <p><%= link_to "Back to all products", products_path, class: "products__all" %></p>
@@ -22,7 +23,14 @@
         <p><%= @product.inventory %> available</p>
       <% end %>
       <p>Price: $<%= @product.price %></p>
-      <%= link_to "Add to cart", products_path, class: "btn btn-primary" %>
+      <p>Category:
+      <% @product.categories.each do |category| %>
+        <%= category.name %>
+      <% end  %>
+      <p><%= link_to "Add to cart", product_order_items_path(@product.id), class: "btn btn-primary", method: :post %></p>
+      <p><%= link_to "Edit", edit_product_path(@product.id),class:"btn btn-primary" %></p>
+      <p><%= link_to "Delete", product_path(@product.id) ,method: :delete, data: { confirm: "Are you sure you want to delete this product?"} ,class:"btn btn-danger"%></p>
     </section>
   </div>
 </div>
+</p>

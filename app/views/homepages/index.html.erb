@@ -1,5 +1,18 @@
 <div class='homepage'>
+
   <section>
-    <h2>Homepage Stuffssss</h2>
+    <ul class="list-group">
+      <%@products.each do |product|%>
+        <li class="list-group-item">
+          <%=product.name%>
+          <%=product.price%>
+          <% if product.image == nil  %>
+            <p> <%= image_tag  "art.jpg" , alt:"pic"%></p>
+          <% else %>
+            <p> <%= image_tag  product.image, alt:"pic"%></p>
+          <% end  %>
+        </li>
+      <%end%>
+    </ul>
   </section>
 </div>

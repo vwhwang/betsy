@@ -28,8 +28,7 @@ describe MerchantsController do
       delete logout_path, params: {}
 
       expect(session[:merchant_id]).must_be_nil
-      # TODO Change this route to redirect to the home root_path
-      must_redirect_to merchants_path
+      must_redirect_to root_path
     end
   end
 
