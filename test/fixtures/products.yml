@@ -1,7 +1,7 @@
 product_1:
   name: starry night
   price: 7546.54
-  inventory: 1
+  inventory: 5
   # image: img
   # artist: van gogh
   merchant: merchant_1
