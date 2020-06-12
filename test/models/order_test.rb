@@ -6,27 +6,21 @@ describe Order do
     it "reduces the number of inventory for each product" do 
       order = orders(:order_1)
       order_item1 = order_items(:order_item_1)
-      order_item2 = order_items(:order_item_2)
+      order_item2 = order_items(:order_item_4)
 
-      order_item1.order = order
-      order_item2.order = order
-      order_item1.save!
-      order_item2.save!
-
-      product1 = order_item1.product
-      product1_count = product1.inventory
-
-      product2 = order_item2.product
-      product2_count = product2.inventory
+      product1_count = order_item1.product.inventory
+      product2_count = order_item2.product.inventory 
 
       order.order_purchase
       
       expect(order_item1.product.reload.inventory).must_equal product1_count - order_item1.quantity
-      expect(order_item2.product.reload.inventory).must_equal product2_count - order_item2.quantity
+      expect(order_item1.product.reload.inventory).must_equal product2_count - order_item2.quantity
     end
 
     it "changes the order state from pending to paid" do 
+      orders(:order_1).order_purchase
 
+      expect(orders(:order_1).status).must_equal "paid"
     end
 
   end 
