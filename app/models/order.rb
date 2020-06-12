@@ -14,7 +14,10 @@ class Order < ApplicationRecord
     self.save
   end
 
-  def clear_cart
-    session[:order_id] = nil
-  end
+  # method for emptying cart without purchasing; potentially moving to controller?
+  # def clear_cart
+  #   self.order_items.each do |item|
+  #     item.destroy
+  #   end
+  # end
 end

@@ -22,7 +22,5 @@ describe Order do
 
       expect(orders(:order_1).status).must_equal "paid"
     end
-
-  end 
-      
+  end       
 end
