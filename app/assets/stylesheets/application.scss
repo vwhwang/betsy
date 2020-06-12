@@ -21,8 +21,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-.app-header__title, a {
-  color:olive;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+  // grid-auto-rows: minmax(100px, auto);
 }
 
 .app-header__header {
@@ -30,7 +33,63 @@ body {
   color: olive;
   margin-bottom: 0.5rem;
   padding: 2rem 1rem 0.5rem 1rem;
+  grid-column: 1/4;
 }
+
+//TODO - 
+.sidebar {
+  // grid-column: 1;
+  // grid-row: 2;
+  // justify-items: start;
+  // align-items: start;
+  // grid-auto-rows: 100px;
+  float: left;
+  text-align: center;
+  background-color: #eeeeee;
+  position: relative;
+  top: 55px;
+  // list-style-type: square;
+  // list-style-position: inside, center;
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 210px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  margin-top: 200px;
+  margin-left: 1rem;
+
+}
+
+.flash {
+  grid-column: 2/4;
+  grid-row: 2;
+  grid-auto-rows: 10px;
+}
+
+.main {
+  grid-column: 2/4;
+  grid-row: 3;
+}
+
+.app-footer__footer {
+  grid-column: 1/4;
+  grid-row: 4;
+  background-color: #eeeeee;
+  color: olive;
+  padding: 2rem 1rem 0.5rem 1rem;
+  text-align: center;
+}
+
+
+
+.app-header__title, a {
+  color:olive;
+}
+
+
 
 .app-header__site-nav-container .nav-item{
   margin-right: 2rem;
@@ -38,7 +97,6 @@ body {
 
 a {
   color: black;
-  
 }
 
 a:link {
@@ -70,25 +128,7 @@ a:hover {
   justify-content: space-between;
 }
 
-.sidebar {
-  float: left;
-  text-align: center;
-  // position: relative;
-  top: 55px;
-  // list-style-type: square;
-  // list-style-position: inside;
-  // height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 210px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #eeeeee;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
-  margin-top: 200px;
-  margin-left: 1rem;
-}
+
 
 ul {
   margin-block-start: 1em;
@@ -109,21 +149,4 @@ ul {
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
   border: none;
-}
-
-.app-footer__footer {
-  background-color: #eeeeee;
-  color: olive;
-  // margin-bottom: 0.5rem;
-  margin-top: -50px;
-  padding: 2rem 1rem 0.5rem 1rem;
-  text-align: center;
-
-  
-}
-
-.main {
-  margin-left: 260px; /* Same width as the sidebar + left position in px */
-
-  padding: 20px 10px;
 }
