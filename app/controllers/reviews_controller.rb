@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
         flash[:success] = "Thank you for reviewing #{@product.name}"
         redirect_to product_path(@product.id)
       else
-        flash[:warning] = "A problem occurred: Could not create review"
+        flash[:error] = "A problem occurred: Could not create review"
         redirect_to request.referrer
       end
     end
