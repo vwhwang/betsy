@@ -8,4 +8,15 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :inventory, presence: true
   validates :merchant_id, presence: true
+
+  def decrease_inventory(quantity)
+    self.inventory -= quantity
+    self.save
+  end
+
+  def inventory_back(quantity)
+    self.inventory += quantity
+    self.save
+  end
+  
 end
