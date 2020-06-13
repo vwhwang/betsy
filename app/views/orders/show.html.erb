@@ -21,9 +21,11 @@
           <td><%= item.order_id %></td>
           <td><%= link_to item.product.name, product_path(item.product.id)%></td>
           <td><%= item.product.price %></td>
-          <td><%= item.quantity %></td>
-          <td><% "PLACE HOLDER TO PUT THE PRICE * Quantity" %></td>
-          <td><%= link_to "Remove item", class: "btn btn-danger", method: "delete", data: { confirm: "Are you sure?" } %></td>
+          <td><%= form_with(url: order_item_path(item.id), method: :patch) do |f| %>
+            <%= number_field(:order_item, :quantity, min: 1, value: item.quantity, onchange: "this.form.submit();")%>
+          <% end %></td>
+          <td><%= item.total_per_item %></td>
+          <td> <%= link_to "Remove", order_item_path(item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-pretty"%></td>
         <tr>
       <% end %>
       </tbody>
@@ -34,3 +36,4 @@
     <% # link_to "Empty cart", empty_cart_path(session[:order_id]), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-custom" %>
 
   </section>
+
