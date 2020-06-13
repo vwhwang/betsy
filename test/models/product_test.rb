@@ -21,7 +21,20 @@ describe Product do
 
       review_1 = Review.create(product: product, rating: 3)
       expect(product.reload.reviews.count).must_equal count + 1 
-
     end 
   end 
+
+  describe 'average_rating' do
+    it 'returns correct rating for a product' do
+      product = products(:product_1)
+
+      expect(product.average_rating).must_include "3.0"
+    end
+
+    it 'returns no reviews yet for product with no reviews' do
+      product = products(:product_4)
+
+      expect(product.average_rating).must_equal "No reviews yet"
+    end
+  end
 end
