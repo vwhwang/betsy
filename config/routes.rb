@@ -12,11 +12,9 @@ Rails.application.routes.draw do
 
   resources :orders
 
+  resources :order_items
   # TODO: implement empty cart route
   # patch "orders/:id", to: "orders#empty_cart", as: "empty_cart"
-
-  
-
 
   resources :products do
     resources :order_items, only: [:index, :new, :create]
