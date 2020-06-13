@@ -45,12 +45,12 @@
     </div>
     <div class="col">
       <% @product.reviews.each do |review| %>
-          <p>Reviewed on <%= review.created_at.strftime("%b %d, %Y") %></p>
           <p>
             <% review.rating.times do %>
-              <img src="app/assets/images/palette.svg" alt="">
+              <%= image_tag("paint-palette.png", class: "img-fluid review__icon") %>
             <% end %>
           </p>
+          <p>Reviewed <%= review.created_at.strftime("%b %d, %Y") %></p>
           <p><%= review.description %></p>
           <hr/>
       <% end %>
