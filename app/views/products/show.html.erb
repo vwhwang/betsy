@@ -36,4 +36,25 @@
       <% end %>
     </section>
   </div>
+  
+  <section class="row reviews">
+    <div class="col-3 justify-content-between">
+      <h2 class="reviews__header">Reviews</h2>
+      <p>[average rating] out of 5</p>
+      <%= link_to "Leave a review", new_product_review_path(@product.id), class: "btn btn-custom" %>
+    </div>
+    <div class="col">
+      <% @product.reviews.each do |review| %>
+          <p>Reviewed on <%= review.created_at.strftime("%b %d, %Y") %></p>
+          <p>
+            <% review.rating.times do %>
+              <img src="app/assets/images/palette.svg" alt="">
+            <% end %>
+          </p>
+          <p><%= review.description %></p>
+          <hr/>
+      <% end %>
+    </div>
+  </section>
+
 </div>
