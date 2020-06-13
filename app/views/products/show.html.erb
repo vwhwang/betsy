@@ -5,7 +5,7 @@
     <section class="col-8 product__image">
       <div class="">
         <% if @product.image %>
-          <%= image_tag(@product.image, class: "img-fluid") %>
+          <%= image_tag(@product.image, class: "img-fluid img_max") %>
         <% else %>
           <%= image_tag('https://www.colonialkc.org/wp-content/uploads/2015/07/Placeholder.png', class: "img-fluid") %>
         <% end %>
