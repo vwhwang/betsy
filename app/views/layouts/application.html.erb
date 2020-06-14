@@ -28,7 +28,7 @@
 
         <ul class="nav app-header__user-nav-container">
           <% if session[:merchant_id]%>
-            <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", merchant_path(session[:merchant_id]), method: :get, class: "btn btn-custom"%></li>
+            <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
             <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
 
           <%else%>
@@ -66,23 +66,23 @@
         <ul>
       </div>
     </section>
-
-
-    <section class="flash">
-      <%flash.each do |name, message|%>
-        <div class="<%name%>">
-          <%=message%>
-        </div>
-      <%end%>
-    </section>
     
 
     <section class="main container-fluid m5">
+      <section class="flash">
+        <%flash.each do |name, message|%>
+          <div class="<%name%>">
+            <%=message%>
+          </div>
+        <%end%>
+      </section>
+
       <%= yield %>
+      
     </section>
 
 
-    <footer class="app-footer__footer">
+    <footer class="app-footer__footer fixed-bottom">
       About Momasy
     </footer>
 
