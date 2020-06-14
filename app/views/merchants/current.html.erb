@@ -2,8 +2,18 @@
   <h2 style="padding-bottom: 20px;">Hello <%= @merchant.username %>!
   <small>Member since: <%= @merchant.created_at.strftime("%b %d, %Y") %></small>
   </h2>
-  <p><%= link_to "Add New Product",new_product_path, class: "btn btn-custom" %></p>
-  <section class="merchant-orders__container">
+
+
+
+  <section data-spy='scroll' style="padding-bottom: 20px;" class="sticky-top">
+      <span><%= link_to "Add New Product", new_product_path, class: "btn btn-custom" %></span>
+      <span><%= link_to "Jump to My Orders", href="#orders", class: "btn btn-custom"%></span>
+      <span><%= link_to "Jump to My Prodcuts", href="#products", class: "btn btn-custom"%></span>
+  </section>
+  
+
+
+  <section id="orders" class="merchant-orders__container">
     <h3 class="merchant-orders__header">My Orders</h3>
     <table class="table">
       <thead class="thead-table">
@@ -25,7 +35,7 @@
   </section>
 
 
-  <section class="merchant-products__container">
+  <section id="products" class="merchant-products__container">
     <h3 class="merchant-products__header">My Products</h3>
     <table class="table">
       <thead class="thead-table">
@@ -59,5 +69,6 @@
       </tbody>
     </table>
 </section>
+
 
 </main>
