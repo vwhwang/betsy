@@ -14,4 +14,11 @@ class Product < ApplicationRecord
     average = self.reviews.average(:rating)
     return "#{average.round(2)} out of 5"
   end
+
+  def reviews_length
+    length = self.reviews.length
+
+    return "#{length} review" if length == 1
+    return "#{length} reviews"
+  end
 end
