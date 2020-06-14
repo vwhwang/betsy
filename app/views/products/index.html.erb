@@ -1,4 +1,8 @@
-<h1>all products</h1>
+<h1 id="top">All products</h1>
+
+<section data-spy='scroll' style="padding-bottom: 20px;" class="sticky-top">
+  <span style="float: right;"><%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
+</section>
 
   <% @products.each do |product| %>
   <div>
@@ -20,4 +24,3 @@
 
   </div>
   <% end  %>
-
