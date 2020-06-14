@@ -117,6 +117,13 @@ a:hover {
   color: white;
 }
 
+.btn-danger {
+  background-color: #df7d60;
+  // background-color: #e39871
+  color: white;
+  border: none;
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -170,4 +177,9 @@ ul {
 .review__icon {
   width: 25px;
   height: 25px;
+}
+
+small {
+  font-size: 1rem;
+  float: right;
 }
