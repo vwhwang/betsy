@@ -24,7 +24,7 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  // grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
   // grid-auto-rows: minmax(100px, auto);
 }
