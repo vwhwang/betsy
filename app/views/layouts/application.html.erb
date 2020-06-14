@@ -46,6 +46,7 @@
           <span clas="sr-only">Browse by Merchant</span>
         </button>
         <ul class="dropdown-menu" role="menu">
+          <%@merchants = Merchant.all%>
           <% @merchants.each do |merchant|%>
             <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
           <%end%>
@@ -64,19 +65,19 @@
         <ul>
       </div>
     </section>
-
-
-    <section class="flash">
-      <%flash.each do |name, message|%>
-        <div class="<%name%>">
-          <%=message%>
-        </div>
-      <%end%>
-    </section>
     
 
     <section class="main container-fluid m5">
+      <section class="flash">
+        <%flash.each do |name, message|%>
+          <div class="<%name%>">
+            <%=message%>
+          </div>
+        <%end%>
+      </section>
+
       <%= yield %>
+      
     </section>
 
 
