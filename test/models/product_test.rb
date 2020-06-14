@@ -37,4 +37,21 @@ describe Product do
       expect(product.average_rating).must_equal "No reviews yet"
     end
   end
+
+  describe 'reviews_length' do
+    it 'returns singular review text for product with one review' do
+      product = products(:product_2)
+      expect(product.reviews_length).must_equal "1 review"
+    end
+
+    it 'returns text with plural reviews for product with more than one review' do
+      product = products(:product_1)
+      expect(product.reviews_length).must_equal "2 reviews"
+    end
+
+    it 'returns text with plural reviews for product with more than one review' do
+      product = products(:product_3)
+      expect(product.reviews_length).must_equal "0 reviews"
+    end
+  end
 end
