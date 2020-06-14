@@ -21,7 +21,9 @@
     <section class="col product__info p-3">
       <h2 class="product__name"><%= @product.name %></h2>
       <h3 class="product__artist font-weight-bold"><%= @product.artist %></h3>
-      <p class="product__details product__price">$<%= @product.price %></p>
+      <p><%= @product.average_rating %> <%= link_to "(#{@product.reviews_length})", href="#reviews", class: "text__hyperlink" %></p>
+      
+      <p class="product__details product__price">$<%= '%.2f' % @product.price %></p>
       <% if @product.inventory <= 3 %>
         <p class="font-italic product__details">Limited stock! Only <%= @product.inventory %> left</p>
       <% else %>
@@ -49,7 +51,7 @@
     </section>
   </div>
   
-  <section class="row reviews">
+  <section id="reviews" class="row reviews p-3">
     <div class="col-3 justify-content-between">
       <h2 class="reviews__header">Rating</h2>
       <p><%= @product.average_rating %></p>

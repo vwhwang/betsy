@@ -15,7 +15,7 @@
     <section class="col product__info p-3">
       <h2 class="product__name"><%= @product.name %></h2>
       <h3 class="product__artist font-weight-bold"><%= @product.artist %></h3>
-      <p>Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant), class:"" %></p>
+      <p>Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant), class: "text__hyperlink" %></p>
       <% if @review.errors.any? %>
         <ul class="errors">
             <% @review.errors.each do |column, message| %>
@@ -26,14 +26,14 @@
         </ul>
       <% end %>
 
-      <%= form_with model: [@product, @review] do |f| %>
+      <%= form_with model: [@product, @review] do |f| %>      
         <div class="form-group">
             <%= f.label :rating %>
             <%= f.select :rating, [5, 4, 3, 2, 1] %>
         </div>
 
         <div class="form-group">
-            <%= f.label :description %>
+            <%= f.label :comments %>
             <%= f.text_area :description, :size => 500, class: "form-control" %>
         </div>
 
