@@ -1,5 +1,4 @@
 
-<main>
   <section class="cart-summary__container">
 
     <h3 class="cart-summary__header">Shopping Cart</h3>
@@ -29,6 +28,9 @@
       <% end %>
       </tbody>
     </table>
-</section>
 
-</main>
+
+    <% # TODO: implement empty cart button %>
+    <% # link_to "Empty cart", empty_cart_path(session[:order_id]), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-custom" %>
+
+  </section>

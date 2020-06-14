@@ -39,6 +39,7 @@
     </header>
 
       
+
     <section class="sidebar">
       <div class="btn-group pull-right right-nav">
         <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
@@ -46,7 +47,7 @@
           <span clas="sr-only">Browse by Merchant</span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <%@merchants = Merchant.all%>
+          <% @merchants = Merchant.all %>
           <% @merchants.each do |merchant|%>
             <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
           <%end%>
