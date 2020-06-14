@@ -38,8 +38,21 @@ class OrdersController < ApplicationController
     end
   end
 
+  # TODO: figure out empty_cart
+  # def empty_cart
+  #   order = Order.find_by(session[:order_id])
+  #   if order
+  #     order.clear_cart
+  #     flash[:success] = "Cart was emptied"
+  #     return redirect_to root_path
+  #   else
+  #     flash[:error] = "Your cart is already empty"
+  #     return redirect_to root_path
+  #   end
+  # end
+
   def order_params
-    return params.require(:order).permit(:name, :email, :address, :credit_card, :credit_card_exp)
+    return params.require(:order).permit(:name, :email, :address, :credit_card, :credit_card_exp, :status)
   end
 end
 

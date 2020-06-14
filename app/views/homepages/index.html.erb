@@ -67,7 +67,7 @@
           <% if product.image == nil  %>
             <p> <%= image_tag  "art.jpg" , alt:"pic"%></p>
           <% else %>
-            <p> <%= image_tag  product.image, alt:"pic"%></p>
+            <p> <%= image_tag  product.image,class:"img-fluid img_max", alt:"pic"%></p>
           <% end  %>
         </li>
       <%end%>

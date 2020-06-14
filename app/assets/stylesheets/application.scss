@@ -23,64 +23,67 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
+  // grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
   // grid-auto-rows: minmax(100px, auto);
 }
 
 .app-header__header {
+  grid-column: 1/4;
   background-color: #eeeeee;
   color: olive;
   margin-bottom: 0.5rem;
   padding: 2rem 1rem 0.5rem 1rem;
-  grid-column: 1/4;
 }
 
 //TODO - 
 .sidebar {
-  // grid-column: 1;
-  // grid-row: 2;
-  // justify-items: start;
-  // align-items: start;
-  // grid-auto-rows: 100px;
-  float: left;
-  text-align: center;
-  background-color: #eeeeee;
-  position: relative;
-  top: 55px;
-  // list-style-type: square;
-  // list-style-position: inside, center;
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 210px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
-  margin-top: 200px;
-  margin-left: 1rem;
-
-}
-
-.flash {
-  grid-column: 2/4;
+  grid-column: 1;
   grid-row: 2;
-  grid-auto-rows: 10px;
+//   // justify-items: start;
+//   // align-items: start;
+  grid-auto-columns: 100px;
+//   float: left;
+//   text-align: center;
+  background-color: #eeeeee;
+//   position: relative;
+//   top: 55px;
+//   // list-style-type: square;
+//   // list-style-position: inside, center;
+//   height: 100%; /* Full-height: remove this if you want "auto" height */
+//   width: 210px; /* Set the width of the sidebar */
+//   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+//   z-index: 1; /* Stay on top */
+//   top: 0; /* Stay at the top */
+//   left: 0;
+//   overflow-x: hidden; /* Disable horizontal scroll */
+//   padding-top: 20px;
+//   margin-top: 200px;
+//   margin-left: 1rem;
+
 }
+
+// .flash {
+//   grid-column: 2/4;
+//   grid-row: 2;
+//   grid-auto-rows: 10px;
+// }
 
 .main {
   grid-column: 2/4;
-  grid-row: 3;
+  grid-row: 2/4;
 }
 
 .app-footer__footer {
   grid-column: 1/4;
-  grid-row: 4;
+  grid-row: 4/5;
   background-color: #eeeeee;
   color: olive;
   padding: 2rem 1rem 0.5rem 1rem;
   text-align: center;
+  float: bottom;
+  position: relative;
 }
 
 
@@ -112,6 +115,13 @@ a:hover {
 .btn-custom {
   background-color: olive;
   color: white;
+}
+
+.btn-danger {
+  background-color: #df7d60;
+  // background-color: #e39871
+  color: white;
+  border: none;
 }
 
 .nav {
@@ -149,4 +159,31 @@ ul {
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
   border: none;
+}
+
+.reviews {
+  margin-top: 2rem;
+}
+
+.reviews h2 {
+  font-size: 2rem;
+  color: #807e01;
+}
+
+.reviews p {
+  margin-bottom: 0.5rem;
+}
+
+.review__icon {
+  width: 25px;
+  height: 25px;
+}
+
+small {
+  font-size: 1rem;
+  float: right;
+}
+
+.text__hyperlink {
+  text-decoration: underline;
 }
