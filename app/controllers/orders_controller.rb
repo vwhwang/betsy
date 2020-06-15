@@ -34,18 +34,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # TODO: figure out empty_cart
-  # def empty_cart
-  #   order = Order.find_by(session[:order_id])
-  #   if order
-  #     order.clear_cart
-  #     flash[:success] = "Cart was emptied"
-  #     return redirect_to root_path
-  #   else
-  #     flash[:error] = "Your cart is already empty"
-  #     return redirect_to root_path
-  #   end
-  # end
 
   def edit 
     @order = Order.find_by(id: params[:id])
@@ -56,14 +44,16 @@ class OrdersController < ApplicationController
 
     if @order.status == "paid"
       flash[:error] = "this order was already confirmed"
-      redirect_to order_path(@order.id)
+      redirect_to orders_path
       return 
     end 
 
-
-
     if @order.nil? 
       head :not_found 
+      return 
+    elsif @order.order_items.empty?
+      flash.now[:error] = "can not make an order if cart empty"
+      render :edit
       return 
     elsif @order.update(order_params)
       @order.order_purchase
@@ -71,7 +61,7 @@ class OrdersController < ApplicationController
       session[:order_id] = nil 
       flash[:success] = "Successfully made an order #{@order}"
       # TODO make confirmation page
-      redirect_to root_path
+      redirect_to orders_path
       return 
     else  
       flash.now[:error] = "can not make an order"
