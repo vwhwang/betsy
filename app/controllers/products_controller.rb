@@ -74,7 +74,15 @@ class ProductsController < ApplicationController
     if @product.nil? 
       head :not_found 
       return 
-    elsif @product.update(active: false)
+    end
+
+    if @product.merchant_id != session[:merchant_id]
+      flash.now[:error] = "You cannot retire a product that doesn't belong to you"
+      redirect_to root_path
+      return
+    end
+
+    if @product.update(active: false)
       flash[:success] = "#{@product.name} has been retired."
     else  
       flash[:error] = "#{@product.name} could not be retired."
@@ -102,7 +110,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :price, :inventory, :image, :merchant_id, category_ids:[])
+    return params.require(:product).permit(:name, :price, :inventory, :image, :merchant_id, :active, category_ids:[])
   end
   
 end
