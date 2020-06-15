@@ -51,7 +51,6 @@ class ProductsController < ApplicationController
     end 
   end 
 
-
   def update 
     @product = Product.find_by(id: params[:id])
 
@@ -67,10 +66,23 @@ class ProductsController < ApplicationController
       render :edit
       return 
     end 
-
   end 
 
+  def retire
+    @product= Product.find(params[:id])
 
+    if @product.nil? 
+      head :not_found 
+      return 
+    elsif @product.update(active: false)
+      flash[:success] = "#{@product.name} has been retired."
+    else  
+      flash[:error] = "#{@product.name} could not be retired."
+    end 
+
+    redirect_to current_merchant_path
+    return 
+  end
 
   def destroy 
     # currently anyone can delete work 
@@ -86,9 +98,6 @@ class ProductsController < ApplicationController
       return 
     end 
   end 
-
-
-
 
   private
 
