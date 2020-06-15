@@ -51,6 +51,30 @@ class OrdersController < ApplicationController
   #   end
   # end
 
+  def edit 
+    @order = Order.find_by(id: params[:id])
+  end 
+
+  def update 
+    @order = Order.find_by(id: params[:id])
+
+    if @order.nil? 
+      head :not_found 
+      return 
+    elsif @order.update(order_params)
+      flash[:success] = "Successfully made an order #{@order}"
+      # TODO make confirmation page
+      redirect_to root_path
+      return 
+    else  
+      flash.now[:error] = "can not make an order"
+      render :edit
+      return 
+    end 
+
+  end 
+
+
   def order_params
     return params.require(:order).permit(:name, :email, :address, :credit_card, :credit_card_exp, :status)
   end

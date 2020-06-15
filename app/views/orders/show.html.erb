@@ -32,6 +32,8 @@
     </table>
 
 
+  <%= link_to "Place Order", edit_order_path(session[:order_id]),class:"btn btn-primary m-1" %>
+
     <% # TODO: implement empty cart button %>
     <% # link_to "Empty cart", empty_cart_path(session[:order_id]), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-custom" %>
 
