@@ -95,7 +95,6 @@ class OrderItemsController < ApplicationController
 
       session[:order_id] = @order_id
     end
-    session[:order_id] = @order_id
   end
 
   # Method to create a new order Item.
