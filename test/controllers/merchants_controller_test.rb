@@ -8,9 +8,9 @@ describe MerchantsController do
       must_respond_with :success
     end
 
-    it "renders 404 not_found for a bogus work ID" do
+    it "renders 404 not_found for a bogus merchant ID" do
       invalid_id_merchant = -1
-     
+      
       get merchant_path(invalid_id_merchant)
 
       must_respond_with :not_found
