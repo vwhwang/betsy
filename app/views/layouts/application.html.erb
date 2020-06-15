@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
@@ -19,7 +20,13 @@
       <h1>
         <%=link_to "Momasy", root_path, :class => "app-header__title"%>
       </h1>
-    
+      
+      <% if session[:order_id]%>
+        <i class="fas fa-shopping-cart fa-2x" class="nav-item app-header__nav_item"><%=link_to "Cart", order_path(session[:order_id])%></i>
+      <%else%>
+        <i class="fas fa-shopping-cart fa-2x" class="nav-item app-header__nav_item"><%=link_to "Cart", orders_path%></i>
+      <%end%>
+
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">  
           <li class="nav-item app-header__nav_item"><%=link_to "View All Art", products_path%></li>
@@ -31,7 +38,6 @@
           <% if session[:merchant_id]%>
             <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
             <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
-
           <%else%>
             </li class="nav-item app-header__nav_item"><%=button_to "Merchant Login", github_login_path, method: :get, class: "btn btn-custom"%></li>
           <%end%>
@@ -85,7 +91,7 @@
 
     <footer class="app-footer__footer fixed-bottom">
       About Momasy
-    </footer>
+    </footer> 
 
   </body>
 

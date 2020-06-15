@@ -5,7 +5,7 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find_by(id: params[:id])
-    render_404 unless @merchant
+    head :not_found unless @merchant
   end
 
   def create
@@ -24,7 +24,6 @@ class MerchantsController < ApplicationController
         flash[:success] = "Logged in as: #{merchant.username}"
       else
         flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
-        
         return redirect_to root_path
       end
     end
