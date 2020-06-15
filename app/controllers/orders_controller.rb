@@ -1,11 +1,7 @@
 class OrdersController < ApplicationController
-  # def index
-  #   if session[:merchant_id]
-  #     @order_items = OrderItem.by_merchant(session[:merchant_id])
-  #   else
-  #     @order_items = OrderItem.by_order_id(session[:order_id])
-  #   end
-  # end
+  def index
+    @orders = Order.all
+  end
 
   def create
     if session[:order_id]
@@ -58,10 +54,21 @@ class OrdersController < ApplicationController
   def update 
     @order = Order.find_by(id: params[:id])
 
+    if @order.status == "paid"
+      flash[:error] = "this order was already confirmed"
+      redirect_to order_path(@order.id)
+      return 
+    end 
+
+
+
     if @order.nil? 
       head :not_found 
       return 
     elsif @order.update(order_params)
+      @order.order_purchase
+      # clear session order id
+      session[:order_id] = nil 
       flash[:success] = "Successfully made an order #{@order}"
       # TODO make confirmation page
       redirect_to root_path
