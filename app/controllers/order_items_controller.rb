@@ -1,12 +1,4 @@
 class OrderItemsController < ApplicationController
-  def index
-    @order_items = OrderItem.all
-  end
-
-  def new
-    @order_item = OrderItem.new
-  end
-
   def create
     @product = Product.find_by(id: params[:product_id])
 
@@ -44,41 +36,50 @@ class OrderItemsController < ApplicationController
       end
       return
     end
-    # Call method to create a new item if there is not current item in the order. 
+    # Call method to create a new item if there is not current item in the order.
     create_new_orderItem
-
   end
 
   def destroy
     order_item = OrderItem.find_by(id: params[:id].to_i)
-    if order_item
-      if order_item.destroy
-        product = Product.find_by(id: order_item.product_id)
-        flash[:success] = "#{order_item.product.name} successfully removed from your basket!"
-      else
-        flash.now[:error] = "A problem occurred. #{order_item.product.name} was not successfully removed from your basket."
-      end
-    end
-    return redirect_to order_path(session[:order_id])
-  end
-
-  def update
-    order_item = OrderItem.find_by(id: params[:id].to_i)
-    product = Product.find_by(id: order_item.product_id)
 
     if order_item.nil?
       head :not_found
       return
     end
 
+    order = Order.find_by(id: order_item.order_id)
+
+    if order_item
+      order_item.destroy
+      flash[:success] = "#{order_item.product.name} successfully removed from your basket!"
+    end
+
+    return redirect_to order_path(order.id)
+  end
+
+  def update
+
+    order_item = OrderItem.find_by(id: params[:id].to_i)
+
+    if order_item.nil?
+      head :not_found
+      return
+    end
+
+    product = Product.find_by(id: order_item.product_id)
+    order = Order.find_by(id: order_item.order_id)
+
+
     if order_item_params[:quantity].to_i > product.inventory
       flash[:error] = "You cannot add more items than are in stock"
-      redirect_to order_path(session[:order_id])
+      redirect_to order_path(order.id)
     elsif order_item.update(order_item_params)
-      redirect_to order_path(session[:order_id]) # go to the index so we can see the driver in the list
+      redirect_to order_path(order.id)
       return
     else # save failed :(
-      render :edit, status: :bad_request # show the new driver form view again
+      flash[:error] = "Your order items was not updated "
+      redirect_to order_path(order.id)
       return
     end
   end
@@ -94,6 +95,7 @@ class OrderItemsController < ApplicationController
 
       session[:order_id] = @order_id
     end
+    session[:order_id] = @order_id
   end
 
   # Method to create a new order Item.
@@ -116,5 +118,6 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
     return params.require(:order_item).permit(:quantity, :order_id, :product_id)
+    # return params.require(:order_item).permit(:product_id).merge(quantity: @quantity, order_id: @order_id)
   end
 end
