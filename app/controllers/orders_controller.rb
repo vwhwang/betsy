@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
-  def index
-    if session[:merchant_id]
-      @order_items = OrderItem.by_merchant(session[:merchant_id])
-    else
-      @order_items = OrderItem.by_order_id(session[:order_id])
-    end
-  end
+  # def index
+  #   if session[:merchant_id]
+  #     @order_items = OrderItem.by_merchant(session[:merchant_id])
+  #   else
+  #     @order_items = OrderItem.by_order_id(session[:order_id])
+  #   end
+  # end
 
   def create
     if session[:order_id]
