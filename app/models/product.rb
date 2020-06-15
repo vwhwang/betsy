@@ -8,6 +8,16 @@ class Product < ApplicationRecord
   validates :inventory, presence: true
   validates :merchant_id, presence: true
 
+  def decrease_inventory(quantity)
+    self.inventory -= quantity
+    self.save
+  end
+
+  def inventory_back(quantity)
+    self.inventory += quantity
+    self.save
+  end
+  
   def average_rating
     return "No reviews yet" if self.reviews.length == 0
 
