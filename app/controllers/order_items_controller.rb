@@ -59,9 +59,6 @@ class OrderItemsController < ApplicationController
     if order_item.save
       @product.decrease_inventory(params[:quantity].to_i)
       flash[:success] = "Item added to order"
-      if session[:order_id].nil?
-        session[:order_id] = order_item.order_id
-      end
       redirect_to order_path(@order_id)
     else
       flash[:error] = "Could not add item to order"
