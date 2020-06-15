@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
+  root to: "homepages#index"
 
-  root to: 'homepages#index'
-  
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "omniauth_calback"
   delete "/logout", to: "merchants#destroy", as: "logout"
@@ -19,6 +18,9 @@ Rails.application.routes.draw do
   resources :products do
     resources :order_items, only: [:index, :new, :create]
   end
-  
-end
 
+  resources :orders do
+    resources :order_items, only: [:update]
+  end
+
+end
