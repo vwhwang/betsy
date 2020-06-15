@@ -11,13 +11,13 @@
       </ol>
 
       <div class="carousel-inner">
-      <%#@products = Product.limit(5).order("RANDOM()")%>
+      <%#@products = Product.limit(3).order("RANDOM()")%>
       <%#@products.each do |product|%>
         <div class="carousel-item active">
           <%product = Product.find_by(id: 13) %>
           <img src="<%=product.image%>" alt="<%=product.name%>" class="d-block w-100 h-100">
           <div class="carousel-caption">
-            <h3><%=product.name%></h3>
+            <h3><%=link_to product.name, product_path(id: product.id)%></h3>
             <p>$<%=product.price%></p>
           </div>
         </div>
@@ -25,7 +25,7 @@
           <%product2 = Product.find_by(id: 14) %>
           <img src="<%=product2.image%>" alt="<%=product2.name%>" class="d-block w-100 h-100">
           <div class="carousel-caption">
-            <h3><%=product2.name%></h3>
+            <h3><%=link_to product2.name, product_path(id: product2.id)%></h3>
             <p>$<%=product2.price%></p>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <%product3 = Product.find_by(id: 15) %>
           <img src="<%=product3.image%>" alt="<%=product3.name%>" class="d-block w-100 h-100">
           <div class="carousel-caption">
-            <h3><%=product3.name%></h3>
+            <h3><%=link_to product3.name, product_path(id: product3.id)%></h3>
             <p>$<%=product3.price%></p>
           </div>
         </div>
