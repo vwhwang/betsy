@@ -3,7 +3,10 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .product {
-  margin-top: 20px;
+  display: inline-block;
+  margin:  0.25rem;
+  padding:  1rem;
+  width:  100%; 
 }
 
 .product__info {
@@ -24,6 +27,9 @@
 
 .product__image {
   width: 100%;
+  padding: 50px;
+  border: 10px solid #343434;
+  box-shadow: 7px 7px 5px grey;
 }
 
 .product__details {
@@ -34,7 +40,20 @@
   font-size: 2rem;
 }
 
+.product__link {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
 .img_max {
   max-width: 530px;
   max-height: 530px;
+}
+
+.product__grid {
+  -webkit-column-width: 19em;
+  -webkit-column-width: 19em;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em; 
 }
