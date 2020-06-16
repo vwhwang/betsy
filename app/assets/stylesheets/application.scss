@@ -204,3 +204,73 @@ img-fluid {
   background-color: #d4edda;
   border-color: #c3e6cb;
 }
+
+
+
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+    color: #444444;
+}
+.btn-success {
+  background-color: #69a89b;
+  border-color: #69a89b;
+}
+
+.btn-success:hover{
+  background-color:  olive;
+  border-color: olive;
+}
+
+.thead-table, .tbody{
+  color: #444444;
+}
+
+@media screen and (max-width: 600px) {
+    table#cart tbody td .form-control {
+		width: 20%;
+		display: inline !important;
+	}
+	.actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	.actions .btn-info{
+		float:left;
+	}
+	.actions .btn-danger{
+		float:right;
+	}
+	
+	table#cart thead { display: none; }
+	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+	table#cart tbody tr td:first-child { background: #444444; color: #fff; }
+	table#cart tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		display: inline-block; width: 8rem;
+	}
+	
+	
+	
+	table#cart tfoot td{display:block; }
+	table#cart tfoot td .btn{display:block;}
+	
+}
+
+h3 {
+  color: olive;
+}
+
+.home__header{
+  display: flex;
+  justify-content: space-between ;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.cart__link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: olive;
+}
