@@ -13,7 +13,6 @@ class CategoriesController < ApplicationController
       redirect_to(:back)
       return
     end
-    # @products = Products.where(category_ids: category)
     @products = @category.products
   end
 
