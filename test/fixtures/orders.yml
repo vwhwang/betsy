@@ -33,3 +33,10 @@ paid_order:
   credit_card: 12
   credit_card_exp: 10/32
   status: paid
+order_with_no_items:
+  name: amy
+  email: amy@amy.vera
+  address: 6537 ave
+  credit_card: 12
+  credit_card_exp: 10/32
+  status: pending
