@@ -14,6 +14,14 @@ class Order < ApplicationRecord
     self.save
   end
 
+  def order_cost
+    @sum = 0 
+    self.order_items.each do |item|
+      @sum += item.total_per_item
+    end 
+    return @sum 
+  end 
+
   # method for emptying cart without purchasing; potentially moving to controller?
   # def clear_cart
   #   self.order_items.each do |item|

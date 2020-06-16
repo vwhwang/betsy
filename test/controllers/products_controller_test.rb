@@ -1,6 +1,32 @@
 require "test_helper"
 
 describe ProductsController do
+  describe "index" do 
+    it "will response to get /products" do 
+      get products_path 
+
+      must_respond_with :success
+    end 
+  end 
+
+  describe "show" do
+    it "responses to get product id" do 
+      valid_id = products(:product_1).id
+
+      get product_path(id: valid_id)
+
+      must_respond_with :ok
+    end 
+
+    it "will redirect to products page for invalid product id" do 
+      invalid_id = -1
+
+      get product_path(id: invalid_id)
+
+      must_redirect_to products_path 
+    end 
+  end
+  
   describe "new" do
     it "responds with success" do
       perform_login
@@ -89,9 +115,7 @@ describe ProductsController do
   end
 
   describe "update" do 
-
     it "will update product" do 
-
       product_hash = {
         product: {
           name: "changed art",
@@ -105,34 +129,28 @@ describe ProductsController do
 
       must_redirect_to product_path(product.id)
       expect(product.reload.name).must_equal product_hash[:product][:name]
-
-    end 
-
-  end 
-
-  describe "index and show" do 
-    it "will response to get /products" do 
-      get products_path 
-
-      must_respond_with :success
-    end 
-
-    it "responses to get product id" do 
-      valid_id = products(:product_1).id
-
-      get product_path(id: valid_id)
-
-      must_respond_with :ok
-    end 
-
-    it "will redirect to products page for invalid product id" do 
-      
-      invalid_id = -1
-      
-      get product_path(id: invalid_id)
-
-      must_redirect_to products_path 
     end 
   end 
 
+  describe "retire" do
+    it "changes active column to false if product belongs to current user" do
+      perform_login(merchants(:merchant_1))
+      product = products(:product_1)
+      
+      patch retire_product_path(product.id)
+
+      expect(product.reload.active).must_equal false
+      must_redirect_to current_merchant_path
+    end
+
+    it "cannot be retired if product does not belong to current user" do
+      perform_login
+      product = products(:product_4)
+
+      patch retire_product_path(product.id)
+
+      must_redirect_to root_path
+      expect(product.reload.active).must_equal true
+    end
+  end
 end

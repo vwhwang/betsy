@@ -1,11 +1,7 @@
 class OrdersController < ApplicationController
-  # def index
-  #   if session[:merchant_id]
-  #     @order_items = OrderItem.by_merchant(session[:merchant_id])
-  #   else
-  #     @order_items = OrderItem.by_order_id(session[:order_id])
-  #   end
-  # end
+  def index
+    @orders = Order.all
+  end
 
   def create
     if session[:order_id]
@@ -34,22 +30,58 @@ class OrdersController < ApplicationController
     else
       # Use current order if there is alrady one:
       order_id = session[:order_id]
+      @order = Order.find_by(id:session[:order_id])
       @order_products = OrderItem.by_order_id(order_id)
+
     end
   end
 
-  # TODO: figure out empty_cart
-  # def empty_cart
-  #   order = Order.find_by(session[:order_id])
-  #   if order
-  #     order.clear_cart
-  #     flash[:success] = "Cart was emptied"
-  #     return redirect_to root_path
-  #   else
-  #     flash[:error] = "Your cart is already empty"
-  #     return redirect_to root_path
-  #   end
-  # end
+
+  def edit 
+    @order = Order.find_by(id: params[:id])
+  end 
+
+
+  def status 
+    @order = Order.find_by(id: params[:id])
+    if @order.nil? 
+      redirect_to root_path
+      return 
+    end 
+  end 
+
+  def update 
+    @order = Order.find_by(id: params[:id])
+
+    if @order.status == "paid"
+      flash[:error] = "this order was already confirmed"
+      redirect_to orders_path
+      return 
+    end 
+
+    if @order.nil? 
+      head :not_found 
+      return 
+    elsif @order.order_items.empty?
+      flash.now[:error] = "can not make an order if cart empty"
+      render :edit
+      return 
+    elsif @order.update(order_params)
+      @order.order_purchase
+      # clear session order id
+      session[:order_id] = nil 
+      flash[:success] = "Successfully made an order #{@order}"
+      # TODO make confirmation page
+      redirect_to status_path(@order.id)
+      return 
+    else  
+      flash.now[:error] = "can not make an order"
+      render :edit
+      return 
+    end 
+
+  end 
+
 
   def order_params
     return params.require(:order).permit(:name, :email, :address, :credit_card, :credit_card_exp, :status)

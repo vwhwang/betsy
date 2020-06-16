@@ -19,12 +19,23 @@ describe OrderItemsController do
     end
 
     it "gets an error when there is not enough stock" do
+      # product = products(:product_3)
+      # current_order = orders(:order_2)
+      # order_item = order_items(:order_item_2)
+
+      # current_order_item = current_order.order_items.find_by(product_id: product.id)
+      # post product_order_items_path(current_order_item.product_id)
+
+      # expect(flash[:error]).must_equal "You cannot add more items than are in stock."
+  
+
     end
 
     it "will not create an Order Item if product inventory is less than 1" do
       product = products(:product_2)
       product.update(inventory: 0)
 
+      post order_items_path(@params)
       expect { post product_order_items_path(product.id) }.must_differ "OrderItem.count", 0
       expect(flash[:error]).must_equal "Could not add item to order! We have no stock available"
       must_respond_with :redirect
@@ -49,7 +60,7 @@ describe OrderItemsController do
 
     it "succeeds for valid data and an existin order Item ID" do
       updates = { order_item: { quantity: 2 } }
-
+ 
       expect {
         patch order_item_path(@item), params: updates
       }.wont_change "OrderItem.count"
@@ -57,6 +68,22 @@ describe OrderItemsController do
       updated_order_item = OrderItem.find_by(id: @item.id)
 
       expect(updated_order_item.quantity).wont_equal 6
+      must_respond_with :redirect
+    end
+
+    it "shows an error if there is not enough inventory" do
+      order_item = order_items(:order_item_1)
+
+      updates = { order_item: { quantity: 3000 } }
+
+      expect {
+        patch order_item_path(order_item.id), params: updates
+      }.wont_change "OrderItem.count"
+
+      updated_order_item = OrderItem.find_by(id: order_item.id)
+
+      expect(flash[:error]).must_equal "You cannot add more items than are in stock"
+      expect(updated_order_item.quantity).wont_equal 3000
       must_respond_with :redirect
     end
 
