@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :merchants
 
+  resources :products
+  resources :categories, only: [:show]
+
+  resources :orders
+
   resources :order_items
   get "/orders/:id/status", to: "orders#status", as: "status"
   # TODO: implement empty cart route
