@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+  
+  skip_before_action :require_login, only: [:root, :show]
+
   def index
     @category = Category.new
   end 
