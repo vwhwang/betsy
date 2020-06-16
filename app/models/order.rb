@@ -17,7 +17,7 @@ class Order < ApplicationRecord
   def order_cost
     @sum = 0 
     self.order_items.each do |item|
-      @sum += item.product.price
+      @sum += item.total_per_item
     end 
     return @sum 
   end 
