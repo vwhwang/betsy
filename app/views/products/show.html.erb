@@ -21,11 +21,9 @@
       <p><%= @product.average_rating %> <%= link_to "(#{@product.reviews_length})", href="#reviews", class: "text__hyperlink" %></p>
       
       <p class="product__details product__price">$<%= '%.2f' % @product.price %></p>
-      <% if @product.inventory <= 3 %>
-        <p class="font-italic product__details">Limited stock! Only <%= @product.inventory %> left</p>
-      <% else %>
-        <p class="product__details"><%= @product.inventory %> available</p>
-      <% end %>
+      
+      <p class="font-italic product__details"><%= @product.inventory_check %></p>
+      
       <%= form_with model: @order_items, class: "row p-3", url: product_order_items_path(@product.id) do |f| %>
         <%= f.select :quantity, (1..@product.inventory) %>
         <%= f.submit "ADD TO CART", class: "btn btn-custom ml-2" %>
