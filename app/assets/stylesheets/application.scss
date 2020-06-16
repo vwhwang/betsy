@@ -13,6 +13,10 @@
  */
 
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
+
+// If you make the item that's `display: grid` have min-height: 100vh 
+// then you can do grid-template-rows: auto 1fr auto
+
 @import "bootstrap";
 
 @import "**/*";
@@ -24,9 +28,9 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  // grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
-  // grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(100px, auto);
 }
 
 .app-header__header {
@@ -83,7 +87,8 @@ body {
   padding: 2rem 1rem 0.5rem 1rem;
   text-align: center;
   float: bottom;
-  position: relative;
+  // position: fixed;
+  // position: bottom;
 }
 
 
@@ -190,4 +195,23 @@ small {
 
 img-fluid {
   max-width: 530px
+}
+
+.carousel-control-next:hover {
+  background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+}
+
+.carousel-control-prev:hover {
+  background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+}
+
+.carousel-caption a{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.301);
+  // align-items: center;
+}
+.carousel-caption {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.301);
+  // align-items: center;
 }

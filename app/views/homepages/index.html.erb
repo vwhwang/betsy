@@ -11,13 +11,15 @@
       </ol>
 
       <div class="carousel-inner">
+      <%# nn to grab random 3-5 with images -- create model method?%>
       <%#@products = Product.limit(3).order("RANDOM()")%>
       <%#@products.each do |product|%>
         <div class="carousel-item active">
           <%product = Product.find_by(id: 13) %>
           <img src="<%=product.image%>" alt="<%=product.name%>" class="d-block w-100 h-100">
           <div class="carousel-caption">
-            <h3><%=link_to product.name, product_path(id: product.id)%></h3>
+            <h3><%=link_to product.name, product_path(id: product.id)%>
+            </h3>
             <p>$<%=product.price%></p>
           </div>
         </div>
@@ -39,14 +41,22 @@
         </div>
         <%#end%>
       </div>
-    <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
+    <a class="left carousel-control-prev" href="#homeCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control-next" href="#homeCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <%# <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
+      <span class="carousel-control-previous-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
     <a class="right carousel-control" href="#homeCarousel" data-slide="next">
       <span class="glyphicon glyphicon-chevron-right"></span>
       <span class="sr-only">Next</span>
-    </a>
+    </a> %>
     </div>
   </div>
 </div>
