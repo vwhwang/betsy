@@ -3,10 +3,8 @@ class Product < ApplicationRecord
   belongs_to :merchant
   has_many :order_items
   has_many :reviews
-  validates :name, presence: true
-  validates :price, presence: true
-  validates :inventory, presence: true
-  validates :merchant_id, presence: true
+  validates :name, :price, :inventory, :merchant_id, presence: true
+  validates :active, inclusion: { in: [ true, false ] }
 
   def decrease_inventory(quantity)
     self.inventory -= quantity
