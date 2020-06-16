@@ -5,7 +5,7 @@ describe MerchantsController do
     it "succeeds for an existing merchant ID" do
       get merchants_path(merchants(:merchant_1))
 
-      must_respond_with :redirect
+      must_respond_with :success
     end
 
     it "renders 404 not_found for a bogus merchant ID" do
