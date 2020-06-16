@@ -1,7 +1,7 @@
 <div class="product container">
   <header>
     <h1>
-      <%= @product.name %> by <% if @product.artist %><%= @product.artist %><% else %>Unknown artist<% end %>
+      <%= @product.name %> by <%= @product.artist ? @product.artist : "Unknown artist" %>
     </h1>
     <p><%= link_to "Back to all products", products_path, class: "products__all" %></p>
   </header>
@@ -17,13 +17,13 @@
 
     <section class="col product__info p-3">
       <h2 class="product__name"><%= @product.name %></h2>
-      <h3 class="product__artist font-weight-bold"><% if @product.artist %><%= @product.artist %><% else %>Unknown artist<% end %></h3>
+      <h3 class="product__artist font-weight-bold"><%= @product.artist ? @product.artist : "Unknown artist" %></h3>
       <p><%= @product.average_rating %> <%= link_to "(#{@product.reviews_length})", href="#reviews", class: "text__hyperlink" %></p>
       
       <p class="product__details product__price">$<%= '%.2f' % @product.price %></p>
       
-      <p class="font-italic product__details"><%= @product.inventory_check %></p>
-      
+      <p class="font-italic product__details"><%= @product.inventory <= 3 ? "Limited stock! Only #{@product.inventory} left" : "#{@product.inventory} in stock" %></p>
+
       <%= form_with model: @order_items, class: "row p-3", url: product_order_items_path(@product.id) do |f| %>
         <%= f.select :quantity, (1..@product.inventory) %>
         <%= f.submit "ADD TO CART", class: "btn btn-custom ml-2" %>
