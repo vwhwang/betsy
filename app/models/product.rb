@@ -7,31 +7,31 @@ class Product < ApplicationRecord
   validates :active, inclusion: { in: [ true, false ] }
 
   def decrease_inventory(quantity)
-    self.inventory -= quantity
-    self.save
+    inventory -= quantity
+    save
   end
 
   def inventory_back(quantity)
-    self.inventory += quantity
-    self.save
+    inventory += quantity
+    save
   end
   
   def average_rating
-    return "No reviews yet" if self.reviews.length == 0
+    return "No reviews yet" if reviews.length == 0
 
-    average = self.reviews.average(:rating)
+    average = reviews.average(:rating)
     return "#{average.round(2)} out of 5"
   end
 
   def reviews_length
-    length = self.reviews.length
+    length = reviews.length
 
     return "#{length} review" if length == 1
     return "#{length} reviews"
   end
 
   def inventory_check
-    return "Limited stock! Only #{inventory} left" if self.inventory <= 3
+    return "Limited stock! Only #{inventory} left" if inventory <= 3
     return "#{inventory} in stock"
   end
 end
