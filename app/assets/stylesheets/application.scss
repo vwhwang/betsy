@@ -24,7 +24,7 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  // grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
   // grid-auto-rows: minmax(100px, auto);
 }
@@ -73,6 +73,7 @@ body {
 .main {
   grid-column: 2/4;
   grid-row: 2/4;
+  margin-bottom: 20px;
 }
 
 .app-footer__footer {
@@ -80,10 +81,11 @@ body {
   grid-row: 4/5;
   background-color: #eeeeee;
   color: olive;
-  padding: 2rem 1rem 0.5rem 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   text-align: center;
-  float: bottom;
-  position: relative;
+  
+  // float: bottom;
+  // position: relative;
 }
 
 
