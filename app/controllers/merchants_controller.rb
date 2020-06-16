@@ -1,4 +1,7 @@
 class MerchantsController < ApplicationController
+
+  skip_before_action :require_login, only: [:new, :create, :destroy, :show, :index]
+
   def index
     @merchants = Merchant.all
   end
