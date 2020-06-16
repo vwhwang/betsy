@@ -22,5 +22,31 @@ describe Order do
 
       expect(orders(:order_1).status).must_equal "paid"
     end
-  end       
+  end   
+
+  describe "order_cost" do 
+    it "should return correct order cost" do
+      order = orders(:order_1)
+      order_item1 = order_items(:order_item_1)
+      order_item2 = order_items(:order_item_4)
+
+      sum = (order_item1.product.price * order_item1.quantity) + (order_item2.product.price * order_item2.quantity)
+      cost = order.order_cost
+
+      expect(cost).must_equal sum
+    end
+  end
+
+  describe "relationships" do
+    it "can have many order_items" do 
+      product = products(:product_1)
+      order = orders(:order_1)
+
+      count = order.order_items.count
+
+      order_item1 = OrderItem.create(product: product, quantity:1, order:order)
+      order_item2 = OrderItem.create(product: product, quantity:1, order:order)
+      expect(order.reload.order_items.count).must_equal count + 2
+    end 
+  end
 end
