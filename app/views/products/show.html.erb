@@ -1,26 +1,20 @@
 <div class="product container">
-  <h1><%= @product.name %> by 
-    <% if @product.artist %>
-      <%= @product.artist %>
-    <% else %>
-      Unknown artist
-    <% end %>
+  <h1>
+    <%= @product.name %> by <% if @product.artist %><%= @product.artist %><% else %>Unknown artist<% end %>
   </h1>
   <p><%= link_to "Back to all products", products_path, class: "products__all" %></p>
-  <div class="row">
-    <section class="col-8 product__image">
-      <div class="text-center">
-        <% if @product.image %>
-          <%= image_tag(@product.image, class: "img-fluid product__image") %>
-        <% else %>
-          <%= image_tag('https://www.colonialkc.org/wp-content/uploads/2015/07/Placeholder.png', class: "img-fluid") %>
-        <% end %>
-      </div>
+  <div class="row align-items-start">
+    <section class="col-8">
+      <% if @product.image == nil || @product.image == "" %>
+        <p><%= image_tag "art.jpg", alt: "#{@product.name}", class: "img-fluid product__image" %></p>
+      <% else %>
+        <p><%= image_tag @product.image, class: "img-fluid product__image", alt: "#{@product.name}" %></p>
+      <% end %>
     </section>
 
     <section class="col product__info p-3">
       <h2 class="product__name"><%= @product.name %></h2>
-      <h3 class="product__artist font-weight-bold"><%= @product.artist %></h3>
+      <h3 class="product__artist font-weight-bold"><% if @product.artist %><%= @product.artist %><% else %>Unknown artist<% end %></h3>
       <p><%= @product.average_rating %> <%= link_to "(#{@product.reviews_length})", href="#reviews", class: "text__hyperlink" %></p>
       
       <p class="product__details product__price">$<%= '%.2f' % @product.price %></p>
@@ -45,7 +39,7 @@
       <% if session[:merchant_id] == @product.merchant_id %>
         <div class="row justify-content-end p-3">
           <p><%= link_to "Edit", edit_product_path(@product.id), class:"btn btn-primary m-1" %></p>
-          <p><%= link_to "Retire", retire_product_path(@product.id), method: :patch, data: { confirm: "Are you sure you want to retire this product?"}, class:"btn btn-primary m-1" %></p>
+          <p><%= link_to "Retire", retire_product_path(@product.id), method: :patch, data: { confirm: "Are you sure you want to retire this product?"}, class:"btn btn-custom m-1" %></p>
           <p><%= link_to "Delete", product_path(@product.id) ,method: :delete, data: { confirm: "Are you sure you want to delete this product?"} ,class:"btn btn-danger m-1"%></p>
         </div>
       <% end %>

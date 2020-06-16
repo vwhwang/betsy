@@ -1,7 +1,9 @@
-<h1 id="top"></h1>
+<h1 id="top" class="product__all__header">
+  All Art <span class="product__count">(<%= Product.all.length %> products)</span>
+</h1>
 
-<section data-spy='scroll' class="sticky-top">
-  <span style="float: right;"><%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
+<section data-spy='scroll' class="sticky-top text-right p-2">
+  <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
 </section>
 
 <div class="product__grid">
@@ -15,8 +17,8 @@
         <% end %>
       <% end %>
       <h3 class="product__name product__link"><%= link_to product.name, product_path(product.id) %></h3>
-      <h4 class="product__artist"><%= product.artist %></h4>
-      <p class="font-weight-bold">$<%= '%.2f' % product.price %></p>
+      <h4 class="product__artist"><% if product.artist %><%= product.artist %><% else %>Unknown artist<% end %></h4>
+      <p class="font-weight-bold"><span class="font-italic"><%= product.inventory %> in stock</span><br/>$<%= '%.2f' % product.price %></p>
 
     </div>
   <% end %>
