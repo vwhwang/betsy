@@ -47,12 +47,6 @@ class ProductsController < ApplicationController
   end 
 
   def retire
-    # if @product.merchant_id != session[:merchant_id]
-    #   flash.now[:error] = "You cannot retire a product that doesn't belong to you"
-    #   redirect_to root_path
-    #   return
-    # end
-
     if @product.update(active: false)
       flash[:success] = "#{@product.name} has been retired."
     else  
@@ -69,7 +63,6 @@ class ProductsController < ApplicationController
     redirect_to current_merchant_path
     return 
   end 
-
 
   private
 
