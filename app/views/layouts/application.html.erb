@@ -17,15 +17,19 @@
     
     <%#HEADER%>
     <header class="app-header__header">
+    <div class="home__header">
       <h1>
         <%=link_to "Momasy", root_path, :class => "app-header__title"%>
       </h1>
-      
-      <% if session[:order_id]%>
-        <i class="fas fa-shopping-cart fa-2x" class="nav-item app-header__nav_item"><%=link_to "Cart", order_path(session[:order_id])%></i>
-      <%else%>
-        <i class="fas fa-shopping-cart fa-2x" class="nav-item app-header__nav_item"><%=link_to "Cart", orders_path%></i>
-      <%end%>
+      <span class="fas fa-shopping-cart fa-2x">
+        <% if session[:order_id]%>
+          <%=link_to "Cart", order_path(session[:order_id]), class: "cart__link"%>
+        <%else%>
+          <%=link_to "Cart", orders_path, class: "cart__link"%>
+        <%end%>
+      </span> 
+    </div>
+ 
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">  
