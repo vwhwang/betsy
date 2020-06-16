@@ -29,9 +29,4 @@ class Product < ApplicationRecord
     return "#{length} review" if length == 1
     return "#{length} reviews"
   end
-
-  def inventory_check
-    return "Limited stock! Only #{inventory} left" if inventory <= 3
-    return "#{inventory} in stock"
-  end
 end
