@@ -24,7 +24,8 @@ class ProductsController < ApplicationController
 
   def create
     if session[:merchant_id]
-      @product = Product.new(product_params) 
+      @product = Product.new(product_params)
+      @product.active = true 
       @product.merchant_id = session[:merchant_id]
       if @product.save 
         flash[:success] = "#{@product.name} has been added to the product database"
