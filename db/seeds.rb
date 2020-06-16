@@ -11,38 +11,9 @@
 require 'csv'
 
 Merchant.create(username: "vickibot", email:"vicki@bot.com")
+Merchant.create(username: "junitobot", email: "junito@bot.com")
 
 puts "Created #{Merchant.count} merchant"
-
-
-
-PRODUCT_FILE = Rails.root.join('db','products-seeds3.csv',)
-
-product_failures = []
-CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
-  product = Product.new
-  product.id = row['id']
-  product.name = row['name']
-  product.price = row['price']
-  product.inventory = row['inventory']
-  product.image = row['image']
-  product.artist = row['artist']
-  product.merchant_id = row['merchant_id']
-  successful = product.save
-
-  if !successful
-    product_failures << product 
-    puts "Failed to save product: #{product.inspect}"
-  else   
-    puts "Created product: #{product.inspect}"
-  end 
-  
-end 
-
-puts "Added #{Product.count} product records"
-puts "#{product_failures.length} products failed to save"
-
-
 
 categories = [
   {
@@ -70,4 +41,41 @@ categories.each do |category|
 end
 
 puts "Created #{count} categories"
+
+PRODUCT_FILE = Rails.root.join('db','products-seeds3.csv',)
+
+
+product_failures = []
+CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
+  categories_sample = []
+  categories_sample.push(rand(1..5))
+  categories_sample.push(rand(1..5))
+  product = Product.new
+  product.id = row['id']
+  product.name = row['name']
+  product.price = row['price']
+  product.inventory = row['inventory']
+  product.image = row['image']
+  product.artist = row['artist']
+  product.merchant_id = row['merchant_id']
+  product.category_ids = categories_sample
+  successful = product.save
+  
+
+
+  if !successful
+    product_failures << product 
+    puts "Failed to save product: #{product.inspect}"
+  else   
+    puts "Created product: #{product.inspect}"
+  end 
+  
+end 
+
+puts "Added #{Product.count} product records"
+puts "#{product_failures.length} products failed to save"
+
+
+
+
 

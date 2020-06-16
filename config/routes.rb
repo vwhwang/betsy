@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :merchants
   resources :products
+  resources :categories, only: [:show]
 
   resources :orders
 
