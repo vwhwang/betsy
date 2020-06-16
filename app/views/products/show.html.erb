@@ -43,6 +43,8 @@
       <p>Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant), class:"" %></p>
 
       <% if session[:merchant_id] == @product.merchant_id %>
+        <hr/>
+        <h4>Manage Product</h4>
         <div class="row justify-content-end p-3">
           <p><%= link_to "Edit", edit_product_path(@product.id), class:"btn btn-primary m-1" %></p>
           <p><%= link_to "Retire", retire_product_path(@product.id), method: :patch, data: { confirm: "Are you sure you want to retire this product?"}, class:"btn btn-custom m-1" %></p>
