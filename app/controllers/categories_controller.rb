@@ -2,18 +2,17 @@ class CategoriesController < ApplicationController
   
   skip_before_action :require_login, only: [:root, :show]
 
-  def index
-    @category = Category.new
-  end 
+  # def index
+  #   @category = Category.all
+  # end 
 
   def show 
     @category = Category.find_by(id: params[:id])
     if @category.nil? 
       flash[:error] = "Category does not exist"
-      redirect_to(:back)
+      head :not_found
       return
     end
-    # @products = Products.where(category_ids: category)
     @products = @category.products
   end
 
