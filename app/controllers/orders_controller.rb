@@ -30,13 +30,24 @@ class OrdersController < ApplicationController
     else
       # Use current order if there is alrady one:
       order_id = session[:order_id]
+      @order = Order.find_by(id:session[:order_id])
       @order_products = OrderItem.by_order_id(order_id)
+
     end
   end
 
 
   def edit 
     @order = Order.find_by(id: params[:id])
+  end 
+
+
+  def status 
+    @order = Order.find_by(id: params[:id])
+    if @order.nil? 
+      redirect_to root_path
+      return 
+    end 
   end 
 
   def update 
@@ -61,7 +72,7 @@ class OrdersController < ApplicationController
       session[:order_id] = nil 
       flash[:success] = "Successfully made an order #{@order}"
       # TODO make confirmation page
-      redirect_to orders_path
+      redirect_to status_path(@order.id)
       return 
     else  
       flash.now[:error] = "can not make an order"
