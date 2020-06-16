@@ -1,41 +1,40 @@
 
-  <section class="cart-summary__container">
+<section class="cart-summary__container">
 
-    <h3 class="cart-summary__header">Shopping Cart</h3>
-    <table class="table">
-      <thead class="thead-table">
-        <tr>
-          <th># Order</th>
-          <th>Product Name</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Item Total</th>
-          <th>Remove from Cart</th>
-        </tr>
-      </thead>
-      <tbody>
-      
-      <% @order_products.each do |item| %>
-        <% product = Product.find_by(id: item.product_id)%>
-        <tr>
-          <td><%= item.order_id %></td>
-          <td><%= link_to item.product.name, product_path(item.product.id)%></td>
-          <td><%= item.product.price %></td>
-          <td><%= form_with(url: order_item_path(item.id), method: :patch) do |f| %>
-            <%= number_field(:order_item, :quantity, min: 1, value: item.quantity, onchange: "this.form.submit();")%>
-          <% end %></td>
-          <td><%= item.total_per_item %></td>
-          <td> <%= link_to "Remove", order_item_path(item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-pretty"%></td>
-        <tr>
-      <% end %>
-      </tbody>
-    </table>
+  <h3 class="cart-summary__header">Shopping Cart</h3>
+  <table class="table">
+    <thead class="thead-table">
+      <tr>
+        <th># Order</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Item Total</th>
+        <th>Remove from Cart</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    <% @order_products.each do |item| %>
+      <% product = Product.find_by(id: item.product_id)%>
+      <tr>
+        <td><%= item.order_id %></td>
+        <td><%= link_to item.product.name, product_path(item.product.id)%></td>
+        <td><%= item.product.price %></td>
+        <td><%= form_with(url: order_item_path(item.id), method: :patch) do |f| %>
+          <%= number_field(:order_item, :quantity, min: 1, value: item.quantity, onchange: "this.form.submit();")%>
+        <% end %></td>
+        <td><%= item.total_per_item %></td>
+        <td> <%= link_to "Remove", order_item_path(item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-pretty"%></td>
+      <tr>
+    <% end %>
+    </tbody>
+  </table>
 
 
-  <%= link_to "Place Order", edit_order_path(session[:order_id]),class:"btn btn-primary m-1" %>
+<%= link_to "Place Order", edit_order_path(session[:order_id]),class:"btn btn-primary m-1" %>
 
-    <% # TODO: implement empty cart button %>
-    <% # link_to "Empty cart", empty_cart_path(session[:order_id]), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-custom" %>
+  <% # TODO: implement empty cart button %>
+  <% # link_to "Empty cart", empty_cart_path(session[:order_id]), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-custom" %>
 
-  </section>
-
+</section>
