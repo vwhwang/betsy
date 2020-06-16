@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :get_product
+  skip_before_action :require_login, only: [:create, :destroy, :update]
 
   def new
     if @product.nil?
