@@ -19,7 +19,7 @@
       <% end %>
 
       <h3 class="product__name product__link"><%= link_to product.name, product_path(product.id) %></h3>
-      <h4 class="product__artist"><%= @product.artist ? @product.artist : "Unknown artist" %></h4>
+      <h4 class="product__artist"><%= product.artist ? product.artist : "Unknown artist" %></h4>
       <p class="font-weight-bold"><span class="font-italic"><%= product.inventory %> in stock</span><br/>$<%= '%.2f' % product.price %></p>
     </div>
   <% end %>
