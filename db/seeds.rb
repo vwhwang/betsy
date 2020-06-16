@@ -25,9 +25,10 @@ CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
   product.name = row['name']
   product.price = row['price']
   product.inventory = row['inventory']
-  product.image = row['image']
   product.artist = row['artist']
   product.merchant_id = row['merchant_id']
+  product.active = row['active']
+  product.image = row['image']
   successful = product.save
 
   if !successful
@@ -41,8 +42,6 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
-
-
 
 categories = [
   {
