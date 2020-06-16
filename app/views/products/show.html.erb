@@ -1,8 +1,11 @@
 <div class="product container">
-  <h1>
-    <%= @product.name %> by <% if @product.artist %><%= @product.artist %><% else %>Unknown artist<% end %>
-  </h1>
-  <p><%= link_to "Back to all products", products_path, class: "products__all" %></p>
+  <header>
+    <h1>
+      <%= @product.name %> by <% if @product.artist %><%= @product.artist %><% else %>Unknown artist<% end %>
+    </h1>
+    <p><%= link_to "Back to all products", products_path, class: "products__all" %></p>
+  </header>
+  
   <div class="row align-items-start">
     <section class="col-8">
       <% if @product.image == nil || @product.image == "" %>
@@ -34,6 +37,7 @@
           <%= link_to "#{category.name}", products_path, class:"" %>
         <% end  %>
       </p>
+
       <p>Sold by <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant), class:"" %></p>
 
       <% if session[:merchant_id] == @product.merchant_id %>
@@ -58,14 +62,14 @@
         <p>No reviews for this product yet. Be the first one to leave a review!</p>
       <% else %>
         <% @product.reviews.each do |review| %>
-            <p>
-              <% review.rating.times do %>
-                <%= image_tag("paint-palette.png", class: "img-fluid review__icon") %>
-              <% end %>
-            </p>
-            <p>Reviewed <%= review.created_at.strftime("%b %d, %Y") %></p>
-            <p><%= review.description %></p>
-            <hr/>
+          <p>
+            <% review.rating.times do %>
+              <%= image_tag("paint-palette.png", class: "img-fluid review__icon") %>
+            <% end %>
+          </p>
+          <p>Reviewed <%= review.created_at.strftime("%b %d, %Y") %></p>
+          <p><%= review.description %></p>
+          <hr/>
         <% end %>
       <% end %>
     </div>
