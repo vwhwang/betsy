@@ -23,15 +23,19 @@
     
     <%#HEADER%>
     <header class="app-header__header">
+    <div class="home__header">
       <h1>
         <%=link_to "Momasy", root_path, :class => "app-header__title"%>
       </h1>
-      
-      <% if session[:order_id]%>
-        <i class="fas fa-shopping-cart fa-2x" class="nav-item app-header__nav_item"><%=link_to "Cart", order_path(session[:order_id])%></i>
-      <%else%>
-        <i class="fas fa-shopping-cart fa-2x" class="nav-item app-header__nav_item"><%=link_to "Cart", orders_path%></i>
-      <%end%>
+      <span class="fas fa-shopping-cart fa-2x">
+        <% if session[:order_id]%>
+          <%=link_to "Cart", order_path(session[:order_id]), class: "cart__link"%>
+        <%else%>
+          <%=link_to "Cart", orders_path, class: "cart__link"%>
+        <%end%>
+      </span> 
+    </div>
+ 
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">  
@@ -41,6 +45,7 @@
         </ul>
 
         <ul class="nav app-header__user-nav-container">
+        
           <% if session[:merchant_id]%>
             <li class="nav-item app-header__nav_item"><%=button_to "#{Merchant.find(session[:merchant_id]).username}'s Dashboard", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
             <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
@@ -73,18 +78,19 @@
           <span clas="sr-only">Browse by Category</span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <%= "Category place holder 1"%>
-          <%= "Category place holder 2"%>
-          <%= "Category place holder 3"%>
+          <% @categories = Category.all%>
+          <% @categories.each do |category|%>
+            <li><%=link_to "#{category.name}", category_path(category.id)%></li>
+          <%end%>
         <ul>
       </div>
     </section>
     
 
     <section class="main container-fluid m5">
-      <section class="flash">
+      <section class="alert__container">
         <%flash.each do |name, message|%>
-          <div class="<%name%>">
+          <div class="alert <%= name %>">
             <%=message%>
           </div>
         <%end%>

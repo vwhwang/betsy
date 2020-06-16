@@ -1,12 +1,4 @@
 
-
-
-<% if session[:merchant_id] %>
-  <%= link_to "Log out", logout_path, method: "delete" %>
-<% else %>
-  <%= link_to "Login with Github", github_login_path %>
-<% end %>
-
 <h2 id="top">List of Merchants</h2>
 
 <section data-spy='scroll' style="padding-bottom: 20px;" class="sticky-top">
@@ -29,5 +21,4 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to "Back to All products List", class: "btn btn-secondary" %>
+<%= link_to "Back to Art List", products_path, class: "btn btn-custom" %></td>

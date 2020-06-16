@@ -3,30 +3,28 @@ class Product < ApplicationRecord
   belongs_to :merchant
   has_many :order_items
   has_many :reviews
-  validates :name, presence: true
-  validates :price, presence: true
-  validates :inventory, presence: true
-  validates :merchant_id, presence: true
+  validates :name, :price, :inventory, :merchant_id, presence: true
+  validates :active, inclusion: { in: [ true, false ] }
 
   def decrease_inventory(quantity)
-    self.inventory -= quantity
-    self.save
+    inventory -= quantity
+    save
   end
 
   def inventory_back(quantity)
-    self.inventory += quantity
-    self.save
+    inventory += quantity
+    save
   end
   
   def average_rating
-    return "No reviews yet" if self.reviews.length == 0
+    return "No reviews yet" if reviews.length == 0
 
-    average = self.reviews.average(:rating)
+    average = reviews.average(:rating)
     return "#{average.round(2)} out of 5"
   end
 
   def reviews_length
-    length = self.reviews.length
+    length = reviews.length
 
     return "#{length} review" if length == 1
     return "#{length} reviews"

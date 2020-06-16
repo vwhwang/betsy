@@ -3,7 +3,18 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .product {
-  margin-top: 20px;
+  display: inline-block;
+  margin:  0.25rem;
+  padding:  1rem;
+  width:  100%; 
+}
+
+.product__all__header {
+  font-size: 2rem;
+}
+
+.product__count {
+  font-size: 1rem;
 }
 
 .product__info {
@@ -26,6 +37,17 @@
   width: 100%;
 }
 
+a .product__image {
+  padding: 50px;
+  border: 10px solid #343434;
+  box-shadow: 7px 7px 5px grey;
+}
+
+a .product__image:hover {
+  transform: scale(1.1);
+  transition: transform 1s;
+}
+
 .product__details {
   width: 100%;
 }
@@ -34,7 +56,24 @@
   font-size: 2rem;
 }
 
+.product__link {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
 .img_max {
   max-width: 530px;
   max-height: 530px;
+}
+
+.product__grid {
+  -webkit-column-width: 19em;
+  -webkit-column-width: 19em;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em; 
+}
+
+.products__sticky {
+  margin-top: -50px;
 }

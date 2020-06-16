@@ -1,4 +1,6 @@
 class OrderItemsController < ApplicationController
+
+  skip_before_action :require_login, only: [:create, :destroy, :update ]
   def create
     @product = Product.find_by(id: params[:product_id])
 
@@ -88,13 +90,20 @@ class OrderItemsController < ApplicationController
 
   # Manage session to create a new session order id if the session order_id is nil
   def manage_session
-    if session[:order_id].nil?
-      # creates a new order if one doesn't exist
+    # check order status to reassign new order
+    order = Order.find_by(id: session[:order_id])
+    if order.nil? || order.status == "paid"
       @order = Order.create
       @order_id = @order.id
-
       session[:order_id] = @order_id
-    end
+    end 
+
+    # if session[:order_id].nil?
+    #   # creates a new order if one doesn't exist
+    #   @order = Order.create
+    #   @order_id = @order.id
+    #   session[:order_id] = @order_id
+    # end
   end
 
   # Method to create a new order Item.

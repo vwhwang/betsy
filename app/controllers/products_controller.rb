@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+
+  skip_before_action :require_login, only: [:root, :show, :index]
+
   def index 
     @products = Product.all
   end 
@@ -24,7 +27,8 @@ class ProductsController < ApplicationController
 
   def create
     if session[:merchant_id]
-      @product = Product.new(product_params) 
+      @product = Product.new(product_params)
+      @product.active = true 
       @product.merchant_id = session[:merchant_id]
       if @product.save 
         flash[:success] = "#{@product.name} has been added to the product database"
@@ -51,7 +55,6 @@ class ProductsController < ApplicationController
     end 
   end 
 
-
   def update 
     @product = Product.find_by(id: params[:id])
 
@@ -67,10 +70,31 @@ class ProductsController < ApplicationController
       render :edit
       return 
     end 
-
   end 
 
+  def retire
+    @product= Product.find(params[:id])
 
+    if @product.nil? 
+      head :not_found 
+      return 
+    end
+
+    if @product.merchant_id != session[:merchant_id]
+      flash.now[:error] = "You cannot retire a product that doesn't belong to you"
+      redirect_to root_path
+      return
+    end
+
+    if @product.update(active: false)
+      flash[:success] = "#{@product.name} has been retired."
+    else  
+      flash[:error] = "#{@product.name} could not be retired."
+    end 
+
+    redirect_to current_merchant_path
+    return 
+  end
 
   def destroy 
     # currently anyone can delete work 
@@ -88,12 +112,10 @@ class ProductsController < ApplicationController
   end 
 
 
-
-
   private
 
   def product_params
-    return params.require(:product).permit(:name, :price, :inventory, :image, :merchant_id, category_ids:[])
+    return params.require(:product).permit(:name, :price, :inventory, :image, :merchant_id, :active, category_ids:[])
   end
   
 end
