@@ -37,7 +37,7 @@
         <ul class="nav app-header__user-nav-container">
         
           <% if session[:merchant_id]%>
-            <li class="nav-item app-header__nav_item"><%=button_to "Logged in as #{Merchant.find(session[:merchant_id]).username}", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
+            <li class="nav-item app-header__nav_item"><%=button_to "#{Merchant.find(session[:merchant_id]).username}'s Dashboard", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
             <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
           <%else%>
             </li class="nav-item app-header__nav_item"><%=button_to "Merchant Login", github_login_path, method: :get, class: "btn btn-custom"%></li>
@@ -68,9 +68,10 @@
           <span clas="sr-only">Browse by Category</span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <%= "Category place holder 1"%>
-          <%= "Category place holder 2"%>
-          <%= "Category place holder 3"%>
+          <% @categories = Category.all%>
+          <% @categories.each do |category|%>
+            <li><%=link_to "#{category.name}", category_path(category.id)%></li>
+          <%end%>
         <ul>
       </div>
     </section>
