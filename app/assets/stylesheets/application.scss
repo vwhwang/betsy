@@ -191,3 +191,16 @@ small {
 img-fluid {
   max-width: 530px
 }
+
+
+.error, .result_text{
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
