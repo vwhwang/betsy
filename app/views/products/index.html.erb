@@ -2,12 +2,12 @@
   All Art <span class="product__count">(<%= Product.all.length %> products)</span>
 </h1>
 
-<section data-spy='scroll' class="sticky-top text-right p-2">
+<section data-spy='scroll' class="sticky-top text-right p-2 products__sticky">
   <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
 </section>
 
 <div class="product__grid">
-  <% @products.each do |product| %>
+  <% @products.where(active: true).each do |product| %>
     <div class="product text-center">
       <%= link_to product_path(product.id) do %>
         <% if product.image == nil || product.image == "" %>
