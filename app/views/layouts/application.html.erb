@@ -76,9 +76,9 @@
     
 
     <section class="main container-fluid m5">
-      <section class="flash">
+      <section class="alert__container">
         <%flash.each do |name, message|%>
-          <div class="<%name%>">
+          <div class="alert <%= name %>">
             <%=message%>
           </div>
         <%end%>
