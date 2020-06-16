@@ -49,7 +49,6 @@ product_failures = []
 CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
   categories_sample = []
   categories_sample.push(rand(1..5))
-  categories_sample.push(rand(1..5))
   product = Product.new
   product.id = row['id']
   product.name = row['name']
@@ -64,8 +63,6 @@ CSV.foreach(PRODUCT_FILE, :headers => true ) do |row|
   product.image = row['image']
 
   successful = product.save
-  
-
 
   if !successful
     product_failures << product 
@@ -78,32 +75,3 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
-
-
-categories = [
-  {
-    name: "Abstract"
-  },
-  {
-    name: "Realism"
-  },  
-  {
-    name: "Surrealism"
-  },  
-  {
-    name: "Pop Art"
-  },  
-  {
-    name: "Sculpture"
-  },  
-]
-
-count = 0
-categories.each do |category|
-  if Category.create(category)
-    count += 1
-  end
-end
-
-
-
