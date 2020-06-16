@@ -22,12 +22,16 @@
       
       <p class="product__details product__price">$<%= '%.2f' % @product.price %></p>
       
-      <p class="font-italic product__details"><%= @product.inventory <= 3 ? "Limited stock! Only #{@product.inventory} left" : "#{@product.inventory} in stock" %></p>
+      <% if !@product.active || @product.inventory == 0 %>
+        <p>This product is no longer available</p>
+      <% else %>
+        <p class="font-italic product__details"><%= @product.inventory <= 3 ? "Limited stock! Only #{@product.inventory} left" : "#{@product.inventory} in stock" %></p>
 
-      <%= form_with model: @order_items, class: "row p-3", url: product_order_items_path(@product.id) do |f| %>
-        <%= f.select :quantity, (1..@product.inventory) %>
-        <%= f.submit "ADD TO CART", class: "btn btn-custom ml-2" %>
-      <%end%>
+        <%= form_with model: @order_items, class: "row p-3", url: product_order_items_path(@product.id) do |f| %>
+          <%= f.select :quantity, (1..@product.inventory) %>
+          <%= f.submit "ADD TO CART", class: "btn btn-custom ml-2" %>
+        <%end%>
+      <% end %>
 
       <%# TODO: link to category pages %>
       <p class="font-italic">
