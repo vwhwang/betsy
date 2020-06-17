@@ -1,10 +1,11 @@
-class Product < ApplicationRecord
+  class Product < ApplicationRecord
   has_and_belongs_to_many :categories
   belongs_to :merchant
   has_many :order_items
   has_many :reviews
-  validates :name, :price, :inventory, :merchant_id, presence: true
+  validates :name, :price, :inventory, :merchant_id, :image, presence: true
   validates :active, inclusion: { in: [ true, false ] }
+  
 
   def decrease_inventory(quantity)
     inventory -= quantity
@@ -29,4 +30,16 @@ class Product < ApplicationRecord
     return "#{length} review" if length == 1
     return "#{length} reviews"
   end
+
+  def self.featured
+    featured_products = []
+    until featured_products.length == 3
+      product = Product.where(active: true).sample
+      if !featured_products.include?(product)
+        featured_products.push(product)
+      end
+    end
+    
+    return featured_products
+  end 
 end

@@ -2,9 +2,11 @@ class CategoriesController < ApplicationController
   
   skip_before_action :require_login, only: [:root, :show]
 
-  # def index
-  #   @category = Category.all
-  # end 
+
+  def index
+    @category = Category.all
+  end 
+
 
   def show 
     @category = Category.find_by(id: params[:id])

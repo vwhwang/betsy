@@ -14,4 +14,20 @@ class Merchant < ApplicationRecord
     # We'll choose to do the saving outside of this method
     return merchant
   end
+
+  def find_orders
+
+    products = Product.where(merchant: id, order_items: true)
+    #storage for order_ids
+
+    #loop through each product in products 
+    #loop through each order item - grabbing the order_id
+    #handle duplicates
+
+    #return order_ids
+
+    #loop through order_ids and create array of order records 
+    #return order records 
+    
+  end
 end
