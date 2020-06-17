@@ -20,7 +20,7 @@
               <td><%= link_to order_item.order.id, orders_manage_path(order_item.id) %></td>
               <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
               <td><%= order_item.quantity %></td>
-              <td><%= order_item.total_per_item%></td>
+              <td><%= '%.2f' % order_item.total_per_item%></td>
               <td><%= order_item.order.created_at.strftime("%b %d, %Y") %></td>
               <td><%= order_item.order.name %></td>
               <td><%= order_item.order.status %></td>

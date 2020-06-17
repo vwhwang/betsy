@@ -52,7 +52,7 @@
       <% Product.where(merchant_id: @merchant.id).each do |product| %>
         <tr>
           <td><%= link_to product.name, product_path(product.id) %></td>
-          <td><%= product.price %></td>
+          <td><%= '%.2f' % product.price %></td>
           <td><%= product.inventory %></td>
           <td>
             <% product.categories.each do |category| %>
