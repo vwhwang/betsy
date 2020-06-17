@@ -13,26 +13,3 @@
     </nav>
   </section>
 
-
-  <section class="cart-summary__container">
-  <h3 class="cart-summary__header"> All existing orders</h3>
-  <table class="table">
-    <thead class="thead-table">
-    <tr>
-      <th>Order ID</th>
-      <th>Order Cost</th>
-      <th>Purchaser</th>
-    </tr>
-  </thead>
-
-    <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.id %></td>
-          <td>$<%= '%.2f' % order.order_cost %></td>
-          <td><%= order.name%></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</section>
