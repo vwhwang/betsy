@@ -54,4 +54,11 @@ describe Product do
       expect(product.reviews_length).must_equal "0 reviews"
     end
   end
+
+  describe "featured" do 
+    it "selects three active products" do 
+      # featured_items = homepages.featured
+      expect(Product.featured.length).must_equal 3
+    end 
+  end
 end

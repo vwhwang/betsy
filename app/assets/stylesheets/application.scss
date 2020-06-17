@@ -216,6 +216,15 @@ img-fluid {
   // align-items: center;
 }
 
+.carousel-image {
+  height: 500px;
+}
+
+.carousel-item {
+  justify-content: center;
+  background-color: black;
+}
+
 .error, .result_text{
   color: #856404;
   background-color: #fff3cd;

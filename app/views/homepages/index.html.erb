@@ -11,12 +11,12 @@
       </ol>
 
       <div class="carousel-inner">
-      <%# nn to grab random 3-5 with images -- create model method?%>
-      <%#@products = Product.limit(3).order("RANDOM()")%>
+    
+
       <%#@products.each do |product|%>
         <div class="carousel-item active">
-          <%product = Product.find_by(id: 13) %>
-          <img src="<%=product.image%>" alt="<%=product.name%>" class="d-block w-100 h-100">
+          <%product = Product.find_by(id: 1) %>
+          <img src="<%=product.image%>" alt="<%=product.name%>" class="d-block carousel-image mx-auto">
           <div class="carousel-caption">
             <h3><%=link_to product.name, product_path(id: product.id)%>
             </h3>
@@ -24,16 +24,16 @@
           </div>
         </div>
         <div class="carousel-item">
-          <%product2 = Product.find_by(id: 14) %>
-          <img src="<%=product2.image%>" alt="<%=product2.name%>" class="d-block w-100 h-100">
+          <%product2 = Product.find_by(id: 2) %>
+          <img src="<%=product2.image%>" alt="<%=product2.name%>" class="d-block carousel-image mx-auto">
           <div class="carousel-caption">
             <h3><%=link_to product2.name, product_path(id: product2.id)%></h3>
             <p>$<%=product2.price%></p>
           </div>
         </div>
         <div class="carousel-item">
-          <%product3 = Product.find_by(id: 15) %>
-          <img src="<%=product3.image%>" alt="<%=product3.name%>" class="d-block w-100 h-100">
+          <%product3 = Product.find_by(id: 3) %>
+          <img src="<%=product3.image%>" alt="<%=product3.name%>" class="d-block carousel-image mx-auto">
           <div class="carousel-caption">
             <h3><%=link_to product3.name, product_path(id: product3.id)%></h3>
             <p>$<%=product3.price%></p>
