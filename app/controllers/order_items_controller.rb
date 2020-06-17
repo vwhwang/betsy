@@ -31,7 +31,6 @@ class OrderItemsController < ApplicationController
         redirect_to product_path(@product.id)
       else
         current_item[:quantity] += params[:quantity].to_i
-        # @product.decrease_inventory(params[:quantity].to_i)
         current_item.save
         flash[:success] = "Successfully updated order item"
         redirect_to order_path(@order_id)
@@ -115,7 +114,6 @@ class OrderItemsController < ApplicationController
     })
 
     if order_item.save
-      # @product.decrease_inventory(params[:quantity].to_i)
       flash[:success] = "Item added to order"
       redirect_to order_path(@order_id)
     else
