@@ -1,5 +1,4 @@
 class MerchantsController < ApplicationController
-
   skip_before_action :require_login, only: [:new, :create, :destroy, :show, :index]
 
   def index
@@ -37,7 +36,6 @@ class MerchantsController < ApplicationController
     return redirect_to root_path
   end
 
-
   def destroy
     session[:merchant_id] = nil
     flash[:success] = "Successfully logged out!"
@@ -47,6 +45,18 @@ class MerchantsController < ApplicationController
 
   def current
     @merchant = Merchant.find_by(id: session[:merchant_id])
+    @order_items = OrderItem.by_merchant(session[:merchant_id])
+    if @merchant.nil?
+      # I have to be logged in!
+      flash[:error] = "You must be logged in to view this page"
+      redirect_to current_merchant_path
+      return
+    end
+  end
+
+  def dashboard
+    @merchant = Merchant.find_by(id: session[:merchant_id])
+    @order_items = OrderItem.by_merchant(session[:merchant_id])
     if @merchant.nil?
       # I have to be logged in!
       flash[:error] = "You must be logged in to view this page"
