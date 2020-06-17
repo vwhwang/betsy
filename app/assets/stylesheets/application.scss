@@ -13,6 +13,10 @@
  */
 
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
+
+// If you make the item that's `display: grid` have min-height: 100vh 
+// then you can do grid-template-rows: auto 1fr auto
+
 @import "bootstrap";
 
 @import "**/*";
@@ -24,7 +28,7 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  // grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-gap: 1em;
   // grid-auto-rows: minmax(100px, auto);
 }
@@ -73,26 +77,33 @@ body {
 .main {
   grid-column: 2/4;
   grid-row: 2/4;
+  margin-bottom: 20px;
 }
 
 .app-footer__footer {
   grid-column: 1/4;
-  grid-row: 4/5;
+  grid-row: 4;
   background-color: #eeeeee;
   color: olive;
-  padding: 2rem 1rem 0.5rem 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   text-align: center;
-  float: bottom;
-  position: relative;
-}
 
+  // float: bottom;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  
+  // float: bottom;
+  // position: relative;
+
+}
 
 
 .app-header__title, a {
   color:olive;
 }
-
-
 
 .app-header__site-nav-container .nav-item{
   margin-right: 2rem;
@@ -100,11 +111,6 @@ body {
 
 a {
   color: black;
-}
-
-a:link {
-  // text-decoration: none;
-  // color: black;
 }
 
 a:hover {
@@ -139,7 +145,6 @@ a:hover {
 }
 
 
-
 ul {
   margin-block-start: 1em;
   margin-block-end: 1em;
@@ -153,6 +158,7 @@ ul {
   flex-direction: column;
   margin-bottom: 0;
 }
+
 .list-group-item {
   position: relative;
   display: block;
@@ -192,6 +198,35 @@ img-fluid {
   max-width: 530px
 }
 
+.carousel-control-next:hover {
+  background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+}
+
+.carousel-control-prev:hover {
+  background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+}
+
+.carousel-caption a{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.39);
+  padding: 6px;
+  
+  
+}
+// .carousel-caption {
+//   color: white;
+//   background-color: rgba(0, 0, 0, 0.301);
+
+// }
+
+.carousel-image {
+  height: 450px;
+}
+
+.carousel-item {
+  justify-content: center;
+  background-color: #000000;
+}
 
 .error, .result_text{
   color: #856404;

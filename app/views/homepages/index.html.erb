@@ -1,18 +1,52 @@
 <div class='homepage'>
 
-  <section>
-    <ul class="list-group">
-      <%@products.each do |product|%>
-        <li class="list-group-item">
-          <%=product.name%>
-          <%=product.price%>
-          <% if product.image == nil  %>
-            <p> <%= image_tag  "art.jpg" , alt:"pic"%></p>
-          <% else %>
-            <p> <%= image_tag  product.image,class:"img-fluid img_max", alt:"pic"%></p>
-          <% end  %>
-        </li>
-      <%end%>
-    </ul>
-  </section>
+  
+<div class="container">
+  <div class="w-75 h-75">
+    <div class="carousel slide" id="homeCarousel" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <%feature_selection = Product.featured%>
+        <div class="carousel-item active">
+          <%product = Product.find_by(id: feature_selection[0].id) %>
+          <img src="<%=product.image%>" alt="<%=product.name%>" class="d-block carousel-image mx-auto">
+          <div class="carousel-caption">
+            <h3><%=link_to product.name, product_path(id: product.id)%>
+            </h3>
+            <p>$<%=product.price%></p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <%product2 = Product.find_by(id: feature_selection[1].id) %>
+          <img src="<%=product2.image%>" alt="<%=product2.name%>" class="d-block carousel-image mx-auto">
+          <div class="carousel-caption">
+            <h3><%=link_to product2.name, product_path(id: product2.id)%></h3>
+            <p>$<%=product2.price%></p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <%product3 = Product.find_by(id: feature_selection[2].id) %>
+          <img src="<%=product3.image%>" alt="<%=product3.name%>" class="d-block carousel-image mx-auto">
+          <div class="carousel-caption">
+            <h3><%=link_to product3.name, product_path(id: product3.id)%></h3>
+            <p>$<%=product3.price%></p>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control-prev" href="#homeCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control-next" href="#homeCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
 </div>
+
