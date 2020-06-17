@@ -1,23 +1,20 @@
-<h2 id="top"><%= @category.name%></h2>
+<h1 id="top" class="product__all__header">
+  <%= @category.name %> <span class="product__count">(<%= @category.products.where('inventory > ?', 0).length %> products)</span>
+</h1>
 
-
-<section data-spy='scroll' style="padding-bottom: 20px;" class="sticky-top">
-  <span style="float: right;"><%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
+<section data-spy='scroll' class="sticky-top text-right p-2 products__sticky">
+  <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
 </section>
 
 <section>
-  <% if @products.empty? %>
+  <% if @products.where('inventory > ?', 0).empty? %>
       <p>Sorry, there are currently no products in this category.</p>
-    <% else %>
-      <% @products.each do |product| %>
-      <h3> <%=link_to product.name , product_path(product.id) %></h3>
-      <p> Price: $ <%=product.price %></p>
-      <% if product.image == nil || product.image == ""  %>
-        <p> <%= image_tag  "art.jpg" , alt:"pic"%></p>
-      <% else %>
-        <p> <%= image_tag  product.image ,class: "img-fluid img_max", alt:"pic"%></p>
-      <% end  %>
-    <% end%>
-  <% end  %>
+  <% else %>
+    <div class="product__grid">
+      <% @products.where('inventory > ?', 0).where(active: true).each do |product| %>
+        <%= render partial: "./shared/product", locals: {product: product} %>
+      <% end %>
+    </div>
+  <% end %>  
 </section>
 

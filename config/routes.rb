@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :merchants
 
   resources :products
-  resources :categories, only: [:show]
+  resources :categories, only: [:show, :new, :create]
 
   resources :orders
   get "/orders/:id/manage", to: "orders#manage", as: "orders_manage"

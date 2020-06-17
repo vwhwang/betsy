@@ -19,6 +19,26 @@ class CategoriesController < ApplicationController
   end
 
 
+  def new 
+    @categories = Category.all 
+    @category = Category.new 
+  end 
+
+
+  def create
+    @category = Category.new(category_params)
+    @categories = Category.all
+    if @category.save 
+      flash[:success] = "#{@category.name} has been added to the category database"
+      redirect_to current_merchant_path
+      return
+    else
+      flash.now[:error] = "Something happened. #{@category.errors.messages[:name]}"
+      render :new
+      return
+    end
+  end
+
   private
 
   def category_params
