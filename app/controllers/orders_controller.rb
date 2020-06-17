@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
-
-  skip_before_action :require_login, only: [:index, :create, :show, :edit, :update]
+  skip_before_action :require_login, only: [:index, :create, :show, :edit, :update, :status]
 
   def index
     @orders = Order.all
@@ -31,63 +30,89 @@ class OrdersController < ApplicationController
       flash[:error] = "You dont have any products to check out"
       redirect_to root_path
     else
-      # Use current order if there is alrady one:
+      # Use current order if there is already one:
       order_id = session[:order_id]
-      @order = Order.find_by(id:session[:order_id])
+      @order = Order.find_by(id: session[:order_id])
       @order_products = OrderItem.by_order_id(order_id)
-
     end
   end
 
-
-  def edit 
+  def manage
     @order = Order.find_by(id: params[:id])
-  end 
-
-
-  def status 
-    @order = Order.find_by(id: params[:id])
-    if @order.nil? 
+    if @order.nil?
+      flash[:error] = "The order does not exist"
       redirect_to root_path
-      return 
-    end 
-  end 
+    end
+  end
 
-  def update 
+  def edit
+    @order = Order.find_by(id: params[:id])
+  end
+
+  def status
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      redirect_to root_path
+      return
+    end
+  end
+
+  def update
     @order = Order.find_by(id: params[:id])
 
     if @order.status == "paid"
       flash[:error] = "this order was already confirmed"
       redirect_to orders_path
-      return 
-    end 
+      return
+    end
 
-    if @order.nil? 
-      head :not_found 
-      return 
+    if @order.nil?
+      head :not_found
+      return
     elsif @order.order_items.empty?
       flash.now[:error] = "can not make an order if cart empty"
       render :edit
-      return 
+      return
     elsif @order.update(order_params)
       @order.order_purchase
       # clear session order id
-      session[:order_id] = nil 
+      session[:order_id] = nil
       flash[:success] = "Successfully made an order #{@order}"
       # TODO make confirmation page
       redirect_to status_path(@order.id)
-      return 
-    else  
+      return
+    else
       flash.now[:error] = "can not make an order"
       render :edit
-      return 
-    end 
+      return
+    end
+  end
 
-  end 
+  def cancel_order
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      flash[:error] = "The order does not exist"
+      redirect_to root_path
+    end
 
+    @order.cancel_order_inventory
+
+    return redirect_to current_merchant_dashboard_path
+  end
+
+  def complete_order
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      flash[:error] = "The order does not exist"
+      redirect_to root_path
+    end
+
+    @order.status = "complete"
+    @order.save!
+    return redirect_to current_merchant_dashboard_path
+  end
 
   def order_params
     return params.require(:order).permit(:name, :email, :address, :credit_card, :credit_card_exp, :status)
   end
 end
-
