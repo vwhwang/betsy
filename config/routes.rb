@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#create", as: "omniauth_calback"
   delete "/logout", to: "merchants#destroy", as: "logout"
   get "/merchants/current", to: "merchants#current", as: "current_merchant"
+  get "/merchants/current/dashboard", to: "merchants#dashboard", as: "current_merchant_dashboard"
+
 
   resources :merchants
 
@@ -12,6 +14,9 @@ Rails.application.routes.draw do
   resources :categories, only: [:show]
 
   resources :orders
+  get "/orders/:id/manage", to: "orders#manage", as: "orders_manage"
+  patch "/orders/:id/cancel", to: "orders#cancel_order", as: "cancel_order"
+  patch "/orders/:id/complete", to: "orders#complete_order", as: "complete_order"
 
   resources :order_items
   get "/orders/:id/status", to: "orders#status", as: "status"
