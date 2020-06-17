@@ -1,6 +1,6 @@
 <header>
   <h1 id="top" class="product__all__header">
-    <%= @merchant.username %> <span class="product__count">(<%= @merchant.products.length %> products)</span>
+    <%= @merchant.username %> <span class="product__count">(<%= @merchant.products.where('inventory > ?', 0).length %> products)</span>
   </h1>
   <p>Joined Momasy <%= @merchant.created_at.strftime("%B %d, %Y") %></p>
 </header>
@@ -10,11 +10,11 @@
 </section>
 
 <section>
-  <% if @merchant.products.empty? %>
+  <% if @merchant.products.where('inventory > ?', 0).empty? %>
       <p>Sorry, this merchant currently does not have any products for sale.</p>
   <% else %>
     <div class="product__grid">
-      <% @merchant.products.where(active: true).each do |product| %>
+      <% @merchant.products.where('inventory > ?', 0).where(active: true).each do |product| %>
         <%= render partial: "./shared/product", locals: {product: product} %>
       <% end %>
     </div>
