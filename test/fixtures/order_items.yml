@@ -14,3 +14,19 @@ order_item_4:
   quantity: 2
   order: order_1
   product: product_1
+order_item_5:
+  quantity: 1
+  order: paid_order
+  product: product_1
+order_item_6:
+  quantity: 1
+  order: paid_order2
+  product: product_1
+order_item_7:
+  quantity: 1
+  order: cancel_order1
+  product: product_1 
+order_item_8:
+  quantity: 1
+  order: cancel_order2
+  product: product_1 

@@ -35,8 +35,29 @@ paid_order:
   status: paid
 order_with_no_items:
   name: amy
-  email: amy@amy.vera
+  email: amy@amy.veras
   address: 6537 ave
   credit_card: 12
   credit_card_exp: 10/32
   status: pending
+paid_order2:
+  name: bob1
+  email: bob@vera.vera
+  address: 6537 ave
+  credit_card: 12
+  credit_card_exp: 10/32
+  status: complete
+cancel_order1:
+  name: bob
+  email: bob1@vera.vera
+  address: 6537 ave
+  credit_card: 12
+  credit_card_exp: 10/32
+  status: cancelled
+cancel_order2:
+  name: bob2
+  email: bob2@vera.vera
+  address: 6537 ave
+  credit_card: 12
+  credit_card_exp: 10/32
+  status: cancelled
