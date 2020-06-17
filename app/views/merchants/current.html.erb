@@ -5,31 +5,71 @@
 
   <section data-spy='scroll' style="padding-bottom: 20px;" class="sticky-top">
     <span><%= link_to "Add New Product", new_product_path, class: "square_btn" %></span>
-    <span><%= link_to "Jump to My Orders", href="#orders", class: "square_btn"%></span>
+    <span><%= link_to "Jump to My Sales", href="#hello", class: "square_btn"%></span>
     <span><%= link_to "Jump to My Prodcuts", href="#products", class: "square_btn"%></span>
-    <span><%= link_to "Sales report", current_merchant_dashboard_path, class: "square_btn" %></span>
   </section>
   
-  <section id="orders" class="merchant-orders__container">
-    <h3 class="merchant-orders__header">My Orders</h3>
-    <table class="table">
-      <thead class="thead-table">
-        <tr>
-          <th>Order Number</th>
-          <th>Customer Name</th>
-          <th>Order Status</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% #Order.where(merchant_id: @merchant.id).each do |order| %>
-        <tr>
-          <td><%#link_to order.id, order_path(order.id)%></td>
-          <td><%# order.name %></td>
-          <td><%# order.status %></td>
-        </tr>
-      <%#end%>
-      </tbody>
-    </table>
+<section id="sales" class="merchant-sales__container">
+    <h3 class="merchant-sales__header">My Sales</h3>
+    <% if @merchant.products %>
+      <p>Total Reveue: $ <%=@merchant.total_revenue%></p>
+      <table class="table">
+        <thead class="thead-table">
+          <tr>
+            <th>Order Number</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Item total</th>
+            <th>Order placement date</th>
+            <th>Purchaser</th>
+            <th>Order Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_items.each do |order_item| %>
+            <tr>
+              <td><%= link_to order_item.order.id, orders_manage_path(order_item.id) %></td>
+              <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= order_item.total_per_item%></td>
+              <td><%= order_item.order.created_at.strftime("%b %d, %Y") %></td>
+              <td><%= order_item.order.name %></td>
+              <td><%= order_item.order.status %></td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    <%else%>
+      <p> There are no orders for your products.</p>
+    <%end%>
+  </section>
+
+
+  <section id="sales" class="merchant-sales__container">
+    <h3 class="merchant-sales__header">Orders by status</h3>
+    <% if @merchant.products %>
+      <%= render partial: "table", locals: {header: "Paid", 
+      order_items: @merchant.orders_by_status("paid"), 
+      number: @merchant.num_orders("paid"),
+      total: @merchant.total_by_status("paid")} %>
+
+      <%= render partial: "table", locals: {header: "Pending", 
+      order_items: @merchant.orders_by_status("pending"), 
+      number: @merchant.num_orders("pending"),
+      total: @merchant.total_by_status("pending")} %>
+
+      <%= render partial: "table", locals: {header: "Complete", 
+      order_items: @merchant.orders_by_status("complete"), 
+      number: @merchant.num_orders("complete"),
+      total: @merchant.total_by_status("complete")} %>
+
+      <%= render partial: "table", locals: {header: "Cancelled", 
+      order_items: @merchant.orders_by_status("cancelled"), 
+      number: @merchant.num_orders("cancelled"),
+      total: @merchant.total_by_status("cancelled")} %>
+    <%else%>
+      <p> There are no orders for your products.</p>
+    <%end%>
   </section>
 
 
