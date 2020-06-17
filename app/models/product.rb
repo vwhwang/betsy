@@ -5,7 +5,8 @@
   has_many :reviews
   validates :name, :price, :inventory, :merchant_id, presence: true
   validates :active, inclusion: { in: [ true, false ] }
-  
+  validates :price, numericality: { greater_than: 0 }
+  validates :inventory, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   def decrease_inventory(quantity)
     inventory -= quantity
