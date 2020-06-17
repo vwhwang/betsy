@@ -2,14 +2,30 @@ require "test_helper"
 
 describe ReviewsController do
   describe "new" do
-    it "responds with success" do
+    it "responds with success for valid product" do
       product = products(:product_1)
-      # Act
+
       get new_product_review_path(product.id)
       
-      # Assert
       must_respond_with :success
     end
+
+    it "responds with not_found for invalid product" do
+      get new_product_review_path(-1)
+      
+      must_respond_with :not_found
+    end
+
+    it "flashes error message and redirects if merchant tries to review their own product" do
+      perform_login(merchants(:merchant_1))
+      product = products(:product_1)
+
+      get new_product_review_path(product.id)
+      
+      expect(flash[:error]).must_equal "You cannot review your own products"
+      must_redirect_to product_path(product.id)
+    end
+
   end
 
   describe "create" do
@@ -39,14 +55,13 @@ describe ReviewsController do
       must_redirect_to product_path(product.id)
     end
 
-    it "does not create a review if the signed in user is the merchant associated with the product" do
-      perform_login
+    it "does not create a review if invalid rating is provided" do
       product = products(:product_1)
     
       # Arrange
       review_hash = {
         review: {
-          rating: 4,
+          rating: 0,
           description: "it's great",
           product: product
         },
@@ -55,24 +70,34 @@ describe ReviewsController do
       # Act-Assert
       expect {
         post product_reviews_path(product.id), params: review_hash
+      }.wont_change "Review.count"
+      
+      expect(flash[:error]).must_include "A problem occurred: Could not create review"
+    end
+
+    it "does not create a review if the signed in user is the merchant associated with the product" do
+      perform_login
+      product = products(:product_1)
+    
+      review_hash = {
+        review: {
+          rating: 4,
+          description: "it's great",
+          product: product
+        },
+      }
+      
+      expect {
+        post product_reviews_path(product.id), params: review_hash
       }.must_change "Review.count", 0
     end
 
-    # it "does not create a review if the product does not exist" do
-    #   review_hash = {
-    #     review: {
-    #       rating: 4,
-    #       description: "it's great",
-    #       product_id: -1
-    #     },
-    #   }
-      
-    #   # Act-Assert
-    #   expect {
-    #     post product_reviews_path(-1), params: review_hash
-    #   }.must_differ "Review.count", 0
+    it "does not create a review if the product does not exist" do
+      expect {
+        post product_reviews_path(-1)
+      }.must_differ "Review.count", 0
             
-    #   must_respond_with :bad_request
-    # end
+      must_respond_with :not_found
+    end
   end
 end
