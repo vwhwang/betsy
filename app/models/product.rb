@@ -3,7 +3,7 @@
   belongs_to :merchant
   has_many :order_items
   has_many :reviews
-  validates :name, :price, :inventory, :merchant_id, :image, presence: true
+  validates :name, :price, :inventory, :merchant_id, presence: true
   validates :active, inclusion: { in: [ true, false ] }
   
 
