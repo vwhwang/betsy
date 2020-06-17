@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  skip_before_action :require_login, only: [:index, :create, :show, :edit, :update]
+  skip_before_action :require_login, only: [:index, :create, :show, :edit, :update, :status]
 
   def index
     @orders = Order.all
