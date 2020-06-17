@@ -47,9 +47,15 @@
       </div>
     </div>
 
+  <div class="form-group row">
+      <%= link_to "Add New Category", new_category_path, class:  "btn btn-custom"%>
+  </div>
+
     <div class="form-group text-center">
       <%= f.submit "#{action_name} product", class: "btn btn-custom" %>
     </div>
   <% end %>
   <p class="text-center"><%= link_to "Back to dashboard", current_merchant_path, class: "btn square_btn" %></p>
 </section>
+
+
