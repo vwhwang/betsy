@@ -1,4 +1,10 @@
 <% if session[:merchant_id]%>
-    <h3>Add product</h3>
-    <%= render partial: "form" ,locals: {action_name: "Create"}%>
+  <div class="main container-fluid">
+    <header>
+      <h3>Add a Product</h3>
+    </header>
+    
+    <%= render partial: "form", locals: {action_name: "Add"} %>
+  </div>
 <% end %>
+
