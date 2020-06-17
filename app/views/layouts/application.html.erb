@@ -47,8 +47,8 @@
         <ul class="nav app-header__user-nav-container">
         
           <% if session[:merchant_id]%>
-            <li class="nav-item app-header__nav_item"><%=button_to "#{Merchant.find(session[:merchant_id]).username}'s Dashboard", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
-            <li class="nav-item app-header__nav_item"><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
+            <li class="nav-item app-header__nav_item "><%=button_to "#{Merchant.find(session[:merchant_id]).username}'s Dashboard", current_merchant_path, method: :get, class: "btn btn-custom"%></li>
+            <li class="nav-item app-header__nav_item "><%=button_to "Logout", logout_path, method: :delete, class: "btn btn-custom"%></li>
           <%else%>
             </li class="nav-item app-header__nav_item"><%=button_to "Merchant Login", github_login_path, method: :get, class: "btn btn-custom"%></li>
           <%end%>
@@ -101,7 +101,7 @@
     </section>
 
 
-    <footer class="app-footer__footer fixed-bottom">
+    <footer class="app-footer__footer">
       About Momasy
     </footer> 
 
