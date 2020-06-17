@@ -5,6 +5,7 @@ product_1:
   artist: van gogh
   active: true
   merchant: merchant_1
+  categories: [1,2]
 product_2:
   name: water lilies
   price: 436.54
@@ -12,6 +13,7 @@ product_2:
   artist: claude monet
   active: true
   merchant: merchant_2
+  categories: [2,3]
 product_3:
   name: mona lisa
   price: 12345.54
@@ -19,6 +21,7 @@ product_3:
   artist: leonardo da vinci
   active: true
   merchant: merchant_1
+  categories: [2,3]
 product_4:
   name: the scream
   price: 643.54
@@ -26,3 +29,4 @@ product_4:
   artist: leonardo da vinci
   active: true
   merchant: merchant_2
+  categories: [1,2]
