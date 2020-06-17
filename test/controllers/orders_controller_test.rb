@@ -51,7 +51,7 @@ describe OrdersController do
     
       get status_path(order.id)
 
-      must_respond_with :found
+      must_respond_with :ok
     end 
 
     it "redirect if invalid order" do 
