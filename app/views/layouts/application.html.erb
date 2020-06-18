@@ -21,7 +21,7 @@
 
   <body class="grid">
     
-    <%#HEADER%>
+  
     <header class="app-header__header">
     <div class="home__header">
       <h1>
@@ -35,7 +35,6 @@
         <%end%>
       </span> 
     </div>
- 
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">  
@@ -56,52 +55,13 @@
       </nav>
     </header>
 
-      
 
-    <section class="sidebar">
-      <div class="btn-group pull-right right-nav">
-        <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-          <span class="carat"></span>
-          <span clas="sr-only">Browse by Merchant</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <% @merchants = Merchant.all %>
-          <% @merchants.each do |merchant|%>
-            <li><%=link_to "#{merchant.username}", merchant_path(merchant)%></li>
-          <%end%>
-        <ul>
-      </div>
-    
-      <div class="btn-group pull-right right-nav"> 
-        <button type="button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-          <span class="carat"></span>
-          <span clas="sr-only">Browse by Category</span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <% @categories = Category.all%>
-          <% @categories.each do |category|%>
-            <li><%=link_to "#{category.name}", category_path(category.id)%></li>
-          <%end%>
-        <ul>
-      </div>
-    </section>
-    
-
-    <section class="main container-fluid m5">
-      <section class="alert__container">
-        <%flash.each do |name, message|%>
-          <div class="alert <%= name %>">
-            <%=message%>
-          </div>
-        <%end%>
-      </section>
 
       <%= yield %>
       
-    </section>
 
 
-    <footer class="app-footer__footer">
+    <footer class="app-footer__footer m5">
       <%= link_to "About Momasy", about_path %>
     </footer> 
 

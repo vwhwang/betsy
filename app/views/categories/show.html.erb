@@ -1,10 +1,15 @@
-<h1 id="top" class="product__all__header">
-  <%= @category.name %> <span class="product__count">(<%= @category.products.where('inventory > ?', 0).length %> products)</span>
-</h1>
 
-<section data-spy='scroll' class="sticky-top text-right p-2 products__sticky">
-  <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
-</section>
+<%= render "shared/sidebar"%>
+<section class="main_w_sidebar container-fluid m5">
+  <%= render "shared/flash"%>
+  
+  <h1 id="top" class="product__all__header">
+    <%= @category.name %> <span class="product__count">(<%= @category.products.where('inventory > ?', 0).length %> products)</span>
+  </h1>
+
+  <section data-spy='scroll' class="sticky-top text-right p-2 products__sticky">
+    <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
+  </section>
 
 <section>
   <% if @products.where('inventory > ?', 0).empty? %>
