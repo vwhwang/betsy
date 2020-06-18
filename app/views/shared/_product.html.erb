@@ -1,9 +1,9 @@
 <div class="product text-center">
   <%= link_to product_path(product.id) do %>
     <% if product.image == nil || product.image == "" %>
-      <p><%= image_tag "art.jpg", alt: "#{product.name}", class: "img-fluid product__image" %></p>
+      <%= image_tag "art.jpg", alt: "#{product.name}", class: "img-fluid product__image mb-3" %>
     <% else %>
-      <p><%= image_tag product.image, class: "img-fluid product__image", alt: "#{product.name}" %></p>
+      <%= image_tag product.image, class: "img-fluid product__image mb-3", alt: "#{product.name}" %>
     <% end %>
   <% end %>
 

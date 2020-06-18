@@ -46,6 +46,12 @@ class MerchantsController < ApplicationController
   def current
     @merchant = Merchant.find_by(id: session[:merchant_id])
     @order_items = OrderItem.by_merchant(session[:merchant_id])
+
+    if status_param != "all"
+      @status = status_param
+      @order_items = @merchant.orders_by_status(status_param)
+    end
+
     if @merchant.nil?
       # I have to be logged in!
       flash[:error] = "You must be logged in to view this page"
@@ -53,4 +59,11 @@ class MerchantsController < ApplicationController
       return
     end
   end
+
+  private
+  
+  def status_param
+    params.permit(:status)[:status] || "all"
+  end
+  
 end
