@@ -1,4 +1,9 @@
-<div class="product container">
+
+<div class="product container main_w_sidebar">
+
+<%= render "shared/sidebar"%>
+<section class="main_w_sidebar container-fluid m5">
+
   <h1>Leave a review for <%= @product.name %></h1>
   <p><%= link_to "Back to product page", product_path(@product.id), class: "products__all" %></p>
   <div class="row">
@@ -43,4 +48,4 @@
       <% end %>
     </section>
   </div>
-</div>
+</section>

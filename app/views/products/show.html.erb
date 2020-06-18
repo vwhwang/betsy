@@ -1,4 +1,6 @@
-<div class="product container">
+<%= render "shared/sidebar"%>
+<section class="main_w_sidebar container-fluid m5">
+  
   <header>
     <h1>
       <%= @product.name %> by <%= @product.artist ? @product.artist : "Unknown artist" %>
@@ -79,4 +81,4 @@
     </div>
   </section>
 
-</div>
+</section>
