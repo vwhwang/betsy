@@ -10,7 +10,7 @@
   <% if @products.where('inventory > ?', 0).empty? %>
       <p>Sorry, there are currently no products in this category.</p>
   <% else %>
-    <div class="product__grid">
+    <div class="card-columns">
       <% @products.where('inventory > ?', 0).where(active: true).each do |product| %>
         <%= render partial: "./shared/product", locals: {product: product} %>
       <% end %>
