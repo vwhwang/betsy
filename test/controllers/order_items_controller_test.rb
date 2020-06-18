@@ -1,4 +1,6 @@
 require "test_helper"
+require_relative "../../app/utilities/session_provider"
+
 
 describe OrderItemsController do
   describe "Create an order Item" do
@@ -18,17 +20,30 @@ describe OrderItemsController do
       expect(item.quantity).must_equal item.quantity
     end
 
-    it "gets an error when there is not enough stock" do
-      # product = products(:product_3)
-      # current_order = orders(:order_2)
-      # order_item = order_items(:order_item_2)
+    it "gets an error when adding a duplicate item with insufficient stock" do
+      order = orders(:duplicate_order_item_order)
+      product = products(:duplicate_order_item_product)
+      product_id = product.id
+      quantity = 2
+      SessionProvider.with_session({order_id: order.id}) do
+        post product_order_items_path(product_id, quantity: quantity)
+      end
 
-      # current_order_item = current_order.order_items.find_by(product_id: product.id)
-      # post product_order_items_path(current_order_item.product_id)
+      expect(flash[:error]).must_equal "You cannot add more items than are in stock."
+      must_respond_with :redirect
+    end
 
-      # expect(flash[:error]).must_equal "You cannot add more items than are in stock."
-  
+    it "gets success when adding a duplicate item with sufficient stock" do
+      order = orders(:duplicate_order_item_order)
+      product = products(:duplicate_order_item_product)
+      product_id = product.id
+      quantity = 1
+      SessionProvider.with_session({ order_id: order.id }) do
+        post product_order_items_path(product_id, quantity: quantity)
+      end
 
+      expect(flash[:success]).must_equal "Successfully updated order item"
+      must_respond_with :redirect
     end
 
     it "will not create an Order Item if product inventory is less than 1" do
@@ -60,7 +75,7 @@ describe OrderItemsController do
 
     it "succeeds for valid data and an existin order Item ID" do
       updates = { order_item: { quantity: 2 } }
- 
+
       expect {
         patch order_item_path(@item), params: updates
       }.wont_change "OrderItem.count"

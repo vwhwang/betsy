@@ -61,3 +61,5 @@ cancel_order2:
   credit_card: 12
   credit_card_exp: 10/32
   status: cancelled
+duplicate_order_item_order:
+  status: pending
