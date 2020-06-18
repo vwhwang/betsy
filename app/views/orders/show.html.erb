@@ -10,6 +10,7 @@
         <th style="width:8%">Quantity</th>
         <th>Price</th>
         <th>Subtotal</th>
+        <th class="text-center">Remove item</th>
 
       </tr>
     </thead>
@@ -30,8 +31,8 @@
           <% end %></td>
           <td>$<%= '%.2f' % item.product.price %></td>
           <td>$ <%= '%.2f' % item.total_per_item %></td>
-          <td class="actions" data-th="">	
-            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"><%= link_to "", order_item_path(item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-pretty"%></i></button>				
+          <td class="actions text-center" data-th="">	
+           <%= link_to "", order_item_path(item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "fas fa-trash btn btn-danger"%>	
 					</td>
       <tr>
     <% end %>
@@ -40,7 +41,7 @@
         <td><%= link_to "Continue Shopping", products_path, class:"btn btn-warning" %></td>
           <td colspan="2" class="hidden-xs"></td>
           <td colspan="1" class="hidden-xs"></td>
-          <td class="hidden-xs text-center"><strong>Total: $<%= @order.order_cost%></strong></td>
+          <td class="hidden-xs">$<%= '%.2f' % @order.order_cost %></td>
           <td><%= link_to "Place Order", edit_order_path(session[:order_id]), class:"btn btn-success btn-block" %></td>
       </tr>
 		</tfoot>
