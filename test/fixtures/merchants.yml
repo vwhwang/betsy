@@ -14,3 +14,8 @@ merchant_3:
   uid: 67898790
   provider: github
   email: testuser3@gmail.com
+duplicate_order_item_merchant:
+  username: "duplicate_order_item_merchant"
+  uid: 167898790
+  provider: github
+  email: duplicate_order_item_merchant@gmail.com

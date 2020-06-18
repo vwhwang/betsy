@@ -30,3 +30,7 @@ order_item_8:
   quantity: 1
   order: cancel_order2
   product: product_1 
+duplicate_order_item_order_item:
+  quantity: 3
+  order: duplicate_order_item_order
+  product: duplicate_order_item_product

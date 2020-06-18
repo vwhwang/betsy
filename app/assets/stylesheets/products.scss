@@ -38,7 +38,7 @@
 }
 
 a .product__image {
-  padding: 50px;
+  padding: 2rem;
   border: 10px solid #343434;
   box-shadow: 7px 7px 5px grey;
 }
@@ -46,6 +46,10 @@ a .product__image {
 a .product__image:hover {
   transform: scale(1.1);
   transition: transform 1s;
+}
+
+.card-columns {
+  column-count: 4;
 }
 
 .product__details {

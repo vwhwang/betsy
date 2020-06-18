@@ -1,5 +1,3 @@
-
-  
 <%= render "shared/sidebar"%>
 <section class="main_w_sidebar container-fluid m5">
 
@@ -13,7 +11,7 @@
     <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
   </section>
 
-  <div class="product__grid">
+  <div class="card-columns">
     <% @products.where('inventory > ?', 0).where(active: true).each do |product| %>
       <%= render partial: "./shared/product", locals: {product: product} %>
     <% end %>

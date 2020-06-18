@@ -29,10 +29,14 @@ class Merchant < ApplicationRecord
   def num_orders(status)
     total_orders = 0
 
-    self.order_items.each do |order_item|
-      if order_item.order.status == status
-        total_orders += 1
+    if status
+      self.order_items.each do |order_item|
+        if order_item.order.status == status
+          total_orders += 1
+        end
       end
+    else
+      total_orders = self.order_items.length
     end
 
     return total_orders
@@ -46,29 +50,21 @@ class Merchant < ApplicationRecord
   end
 
   def total_by_status(status)
-
     total_by_status = 0
-    self.order_items.each do |item|
-      if item.order.status == status
-        total_by_status += item.order.order_cost
+
+    if status
+      self.order_items.each do |item|
+        if item.order.status == status
+          total_by_status += (item.product.price * item.quantity)
+        end
+      end
+    else
+      self.order_items.each do |item|
+        total_by_status += (item.product.price * item.quantity)
       end
     end
+
     return total_by_status
   end
 
-  def find_orders
-
-    products = Product.where(merchant: id, order_items: true)
-    #storage for order_ids
-
-    #loop through each product in products 
-    #loop through each order item - grabbing the order_id
-    #handle duplicates
-
-    #return order_ids
-
-    #loop through order_ids and create array of order records 
-    #return order records 
-    
-  end
 end
