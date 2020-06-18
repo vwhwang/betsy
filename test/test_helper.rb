@@ -65,4 +65,17 @@ class ActiveSupport::TestCase
     # expect(session[:merchant_id]).must_equal merchant.id
     return merchant
   end
+
+  def create_order
+    post orders_path
+    order = Order.last
+    product = products(:product_1)
+
+    order_item = OrderItem.create(order: order, product: product, quantity: 2)
+
+    # Verify the order ID was saved - if that didn't work, this test is invalid
+    expect(session[:order_id]).must_equal order.id
+
+    return order
+  end
 end
