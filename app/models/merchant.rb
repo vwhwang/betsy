@@ -55,12 +55,12 @@ class Merchant < ApplicationRecord
     if status
       self.order_items.each do |item|
         if item.order.status == status
-          total_by_status += item.order.order_cost
+          total_by_status += (item.product.price * item.quantity)
         end
       end
     else
       self.order_items.each do |item|
-        total_by_status += item.order.order_cost
+        total_by_status += (item.product.price * item.quantity)
       end
     end
 
