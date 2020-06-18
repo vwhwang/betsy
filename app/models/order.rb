@@ -1,5 +1,16 @@
 class Order < ApplicationRecord
   has_many :order_items
+  before_save :default_status
+
+  validates :email, presence: true, on: :update
+  validates :address, presence: true, on: :update
+  validates :name, presence: true, on: :update
+  validates :credit_card, presence: true, numericality: true, length: { minimum: 4 }, on: :update
+  validates :credit_card_exp, presence: true, on: :update
+
+  def default_status
+    self.status ||= "pending"
+  end
 
   def order_purchase
     # Reduces the number of inventory for each product
