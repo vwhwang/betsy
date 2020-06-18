@@ -88,7 +88,7 @@ class OrderItemsController < ApplicationController
     # check order status to reassign new order
     order = Order.find_by(id: session[:order_id])
     if order.nil? || order.status == "paid"
-      @order = Order.create
+      @order = Order.create(status:"pending")
       order = @order
     end
     @order_id = order.id
