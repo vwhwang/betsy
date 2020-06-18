@@ -57,9 +57,39 @@ describe Order do
       order_item5.product_id
 
       order.cancel_order_inventory
-      
-      expect(order.status).must_equal "cancelled"
 
+      expect(order.status).must_equal "cancelled"
+    end
+  end
+
+  describe "Validations" do
+
+    it "requires a emal" do
+      order = orders(:paid_order)
+      order.email = nil
+      expect(order.valid?).must_equal false
+      expect(order.errors.messages).must_include :email
+    end
+
+    it "requires a name" do
+      order = orders(:paid_order)
+      order.name = nil
+      expect(order.valid?).must_equal false
+      expect(order.errors.messages).must_include :name
+    end
+
+    it "requires a credit_card" do
+      order = orders(:paid_order)
+      order.credit_card = nil
+      expect(order.valid?).must_equal false
+      expect(order.errors.messages).must_include :credit_card
+    end
+
+    it "requires a address" do
+      order = orders(:paid_order)
+      order.address = nil
+      expect(order.valid?).must_equal false
+      expect(order.errors.messages).must_include :address
     end
   end
 end

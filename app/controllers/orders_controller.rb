@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
       redirect_to status_path(@order.id)
       return
     else
-      flash.now[:error] = "can not make an order"
+      flash.now[:error] = "We cannot proceed this order. Sorry! #{@order.errors.messages}"
       render :edit
       return
     end

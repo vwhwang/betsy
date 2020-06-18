@@ -1,5 +1,4 @@
 class OrderItemsController < ApplicationController
-  before_action :initialize_session
   skip_before_action :require_login, only: [:create, :destroy, :update ]
   def create
     @product = Product.find_by(id: params[:product_id])
