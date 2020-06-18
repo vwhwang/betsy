@@ -27,19 +27,19 @@
       <table class="table">
         <thead class="thead-table">
           <tr>
-            <th>Order Number</th>
+            <th>Order #</th>
             <th>Product</th>
             <th>Quantity</th>
-            <th>Item total</th>
-            <th>Order placement date</th>
+            <th>Total</th>
+            <th>Order placed</th>
             <th>Purchaser</th>
-            <th>Order Status</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <% @order_items.each do |order_item| %>
               <tr>
-                <td><%= link_to order_item.order.id, orders_manage_path(order_item.id) %></td>
+                <td><%= link_to order_item.order.id, orders_manage_path(order_item.order.id) %></td>
                 <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
                 <td><%= order_item.quantity %></td>
                 <td>$<%= order_item.total_per_item %></td>
@@ -74,7 +74,7 @@
           <th>Price</th>
           <th>Inventory</th>
           <th>Category</th>
-          <th>Created at</th>
+          <th>Created</th>
           <th>Status</th>
           <th>Edit</th>
           <th>Delete</th>
