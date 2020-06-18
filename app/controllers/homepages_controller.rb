@@ -1,6 +1,6 @@
 class HomepagesController < ApplicationController
   
-  skip_before_action :require_login, only: [:root, :index]
+  skip_before_action :require_login, only: [:root, :index, :about]
   
   def index
     @products = Product.all 

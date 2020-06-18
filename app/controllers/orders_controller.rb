@@ -48,6 +48,26 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find_by(id: params[:id])
+    order_items = @order.order_items
+    
+    inventory_errors = 0
+    order_items.each do |order_item|
+      if order_item.quantity > order_item.product.inventory
+        if order_item.product.inventory == 0
+          order_item.destroy
+        else
+          order_item.quantity = order_item.product.inventory
+          order_item.save
+        end
+        inventory_errors += 1
+      end
+    end
+
+    if inventory_errors > 0
+      flash[:error] = "Some of the items in your cart are no longer in stock. We have updated your cart to reflect the current quantity."
+      redirect_to order_path(params[:id])
+      return
+    end
   end
 
   def status
