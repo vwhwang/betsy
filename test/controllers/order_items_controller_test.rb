@@ -1,5 +1,5 @@
 require "test_helper"
-require_relative "../../app/utilities/session_provider"
+require "session_provider"
 
 
 describe OrderItemsController do

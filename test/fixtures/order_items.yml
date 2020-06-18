@@ -34,3 +34,7 @@ duplicate_order_item_order_item:
   quantity: 3
   order: duplicate_order_item_order
   product: duplicate_order_item_product
+cancel_order_order_item:
+  quantity: 1
+  order: cancel_order_paid
+  product: product_1 
