@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "merchants#destroy", as: "logout"
   get "/merchants/current", to: "merchants#current", as: "current_merchant"
   get "/merchants/current/dashboard", to: "merchants#dashboard", as: "current_merchant_dashboard"
-
+  get "/about", to: "homepages#about", as: "about"
 
   resources :merchants
 
