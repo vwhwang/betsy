@@ -118,7 +118,7 @@ class OrdersController < ApplicationController
 
     @order.cancel_order_inventory
 
-    return redirect_to current_merchant_dashboard_path
+    return redirect_to current_merchant_path
   end
 
   def complete_order
@@ -130,7 +130,7 @@ class OrdersController < ApplicationController
 
     @order.status = "complete"
     @order.save!
-    return redirect_to current_merchant_dashboard_path
+    return redirect_to current_merchant_path
   end
 
   def order_params

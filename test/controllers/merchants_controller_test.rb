@@ -10,7 +10,7 @@ describe MerchantsController do
 
     it "renders 404 not_found for a bogus merchant ID" do
       invalid_id_merchant = -1
-      
+
       get merchant_path(invalid_id_merchant)
 
       must_respond_with :not_found
@@ -58,7 +58,7 @@ describe MerchantsController do
     end
   end
 
-  describe "going to the detail page of the current merchant" do
+  describe "Current merchant" do
     it "responds with success if a merchant is logged in" do
       perform_login
 
@@ -68,8 +68,11 @@ describe MerchantsController do
     end
 
     it "responds with a redirect if no merchant is logged in" do
+
       get current_merchant_path
+
       must_respond_with :redirect
+
     end
   end
 end

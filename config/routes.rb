@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#create", as: "omniauth_calback"
   delete "/logout", to: "merchants#destroy", as: "logout"
   get "/merchants/current", to: "merchants#current", as: "current_merchant"
+
   get "/merchants/current/dashboard", to: "merchants#dashboard", as: "current_merchant_dashboard"
   get "/about", to: "homepages#about", as: "about"
+
 
   resources :merchants
 
