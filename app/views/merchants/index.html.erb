@@ -1,29 +1,17 @@
 
 <%= render "shared/sidebar"%>
+
 <section class="main_w_sidebar container-fluid m5">
   <%= render "shared/flash"%>
 
   <h2 id="top">List of Merchants</h2>
-
-  <section data-spy='scroll' style="padding-bottom: 20px;" class="sticky-top">
-    <span style="float: right;"><%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
+  <section data-spy='scroll' class="sticky-top text-right p-2 products__sticky">
+    <%= link_to "Jump to top", href="#top", class: "btn btn-custom"%></span>
   </section>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Joined</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @merchants.each do |merchant| %>
-        <tr>
-          <td><%= link_to merchant.username, merchant_path(merchant) %></td>
-          <td><%= merchant.created_at %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to "Back to Art List", products_path, class: "btn btn-custom" %></td>
+  <div class="card-columns">
+    <% @merchants.each do |merchant| %>
+      <%= render partial: "merchant", locals: {merchant: merchant} %>
+    <% end %>
+  </div>
 </section>
