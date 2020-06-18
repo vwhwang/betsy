@@ -24,7 +24,7 @@
     featured_products = []
     until featured_products.length == 3
       product = Product.where(active: true).sample
-      if !featured_products.include?(product)
+      if !featured_products.include?(product) && product.image != ""
         featured_products.push(product)
       end
     end
