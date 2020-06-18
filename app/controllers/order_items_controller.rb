@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-
+  before_action :initialize_session
   skip_before_action :require_login, only: [:create, :destroy, :update ]
   def create
     @product = Product.find_by(id: params[:product_id])
@@ -15,12 +15,8 @@ class OrderItemsController < ApplicationController
       return
     end
 
-    # Call private method to create a new session if the session is nil.
-    manage_session
-
-    # Use current order if there is alrady one:
-    @order_id = session[:order_id]
-    current_order = Order.find(@order_id)
+    # Call private method to create a new session if the session is nil. 
+    current_order = manage_session
 
     current_item = current_order.order_items.find_by(product_id: params[:product_id])
     # checks if item is already in order, updates by 1 if so
@@ -93,16 +89,11 @@ class OrderItemsController < ApplicationController
     order = Order.find_by(id: session[:order_id])
     if order.nil? || order.status == "paid"
       @order = Order.create
-      @order_id = @order.id
-      session[:order_id] = @order_id
-    end 
-
-    # if session[:order_id].nil?
-    #   # creates a new order if one doesn't exist
-    #   @order = Order.create
-    #   @order_id = @order.id
-    #   session[:order_id] = @order_id
-    # end
+      order = @order
+    end
+    @order_id = order.id
+    session[:order_id] = @order_id
+    return order 
   end
 
   # Method to create a new order Item.

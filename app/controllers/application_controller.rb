@@ -32,4 +32,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def initialize_session
+  return unless Rails.env.test?
+  SessionProvider.session.each do |key, value|
+    session[key] = value
+  end
+end
 end

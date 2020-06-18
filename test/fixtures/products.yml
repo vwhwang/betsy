@@ -30,3 +30,10 @@ product_4:
   active: true
   merchant: merchant_2
   categories: [1,2]
+duplicate_order_item_product:
+  name: duplicate_order_item_product
+  price: 43
+  inventory: 4
+  artist: leonardo da vinci
+  active: true
+  merchant: duplicate_order_item_merchant
