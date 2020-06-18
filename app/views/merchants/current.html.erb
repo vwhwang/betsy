@@ -12,9 +12,16 @@
   </section>
   
 <section id="sales" class="merchant-sales__container">
-    <h3 class="merchant-sales__header">My Sales</h3>
+    <h3 class="merchant-sales__header"><%= @status ? @status.capitalize : "All" %> Orders</h3>
     <% if @merchant.products %>
-      <p>Total Reveue: $ <%=@merchant.total_revenue%></p>
+      <p>Total Revenue: $ <%= @merchant.total_by_status(@status) %></p>
+      <p># of Orders: <%= @merchant.num_orders(@status) %></p>
+
+      <%= form_with url: current_merchant_path, method: :get do |f| %>
+        <%= f.label :status %>
+        <%= f.select :status, options_for_select(['all', 'paid', 'pending', 'complete', 'cancelled'], :selected => @status), {}, onChange: "this.form.submit()"  %>
+      <% end %>
+
       <table class="table">
         <thead class="thead-table">
           <tr>
@@ -29,15 +36,15 @@
         </thead>
         <tbody>
           <% @order_items.each do |order_item| %>
-            <tr>
-              <td><%= link_to order_item.order.id, orders_manage_path(order_item.id) %></td>
-              <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
-              <td><%= order_item.quantity %></td>
-              <td><%= order_item.total_per_item%></td>
-              <td><%= order_item.order.created_at.strftime("%b %d, %Y") %></td>
-              <td><%= order_item.order.name %></td>
-              <td><%= order_item.order.status %></td>
-            </tr>
+              <tr>
+                <td><%= link_to order_item.order.id, orders_manage_path(order_item.id) %></td>
+                <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
+                <td><%= order_item.quantity %></td>
+                <td>$<%= order_item.total_per_item%></td>
+                <td><%= order_item.order.created_at.strftime("%b %d, %Y") %></td>
+                <td><%= order_item.order.name %></td>
+                <td><%= order_item.order.status %></td>
+              </tr>
           <%end%>
         </tbody>
       </table>
@@ -94,7 +101,7 @@
       <% Product.where(merchant_id: @merchant.id).each do |product| %>
         <tr>
           <td><%= link_to product.name, product_path(product.id) %></td>
-          <td><%= '%.2f' % product.price %></td>
+          <td>$<%= '%.2f' % product.price %></td>
           <td><%= product.inventory %></td>
           <td>
             <% product.categories.each do |category| %>

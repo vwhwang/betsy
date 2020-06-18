@@ -29,10 +29,14 @@ class Merchant < ApplicationRecord
   def num_orders(status)
     total_orders = 0
 
-    self.order_items.each do |order_item|
-      if order_item.order.status == status
-        total_orders += 1
+    if status
+      self.order_items.each do |order_item|
+        if order_item.order.status == status
+          total_orders += 1
+        end
       end
+    else
+      total_orders = self.order_items.length
     end
 
     return total_orders
@@ -46,13 +50,20 @@ class Merchant < ApplicationRecord
   end
 
   def total_by_status(status)
-
     total_by_status = 0
-    self.order_items.each do |item|
-      if item.order.status == status
+
+    if status
+      self.order_items.each do |item|
+        if item.order.status == status
+          total_by_status += item.order.order_cost
+        end
+      end
+    else
+      self.order_items.each do |item|
         total_by_status += item.order.order_cost
       end
     end
+
     return total_by_status
   end
 
