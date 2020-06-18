@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+  before_action :find_order, only: [:manage, :edit, :status, :update, :cancel_order, :complete_order]
   skip_before_action :require_login, only: [:index, :create, :show, :edit, :update, :status]
 
   def index
@@ -8,9 +9,11 @@ class OrdersController < ApplicationController
 
   def create
     if session[:order_id]
+      # TODO confused by what this is doing
       @order = Order.new(order_params)
     else
       @order = Order.new
+      # TODO why is session[:order_id] set here and also on line 22?
       session[:order_id] = @order.id
     end
 
@@ -28,8 +31,9 @@ class OrdersController < ApplicationController
   def show
     if session[:order_id].nil?
       # creates a new order if one doesn't exist
-      flash[:error] = "You dont have any products to check out"
-      redirect_to root_path
+      flash[:error] = "You haven't started an order yet. Add some items to your cart first!"
+      redirect_to products_path
+      return
     else
       # Use current order if there is already one:
       order_id = session[:order_id]
@@ -39,15 +43,9 @@ class OrdersController < ApplicationController
   end
 
   def manage
-    @order = Order.find_by(id: params[:id])
-    if @order.nil?
-      flash[:error] = "The order does not exist"
-      redirect_to root_path
-    end
   end
 
   def edit
-    @order = Order.find_by(id: params[:id])
     order_items = @order.order_items
     
     inventory_errors = 0
@@ -71,34 +69,24 @@ class OrdersController < ApplicationController
   end
 
   def status
-    @order = Order.find_by(id: params[:id])
-    if @order.nil?
-      redirect_to root_path
-      return
-    end
   end
 
   def update
-    @order = Order.find_by(id: params[:id])
-
     if @order.status == "paid"
-      flash[:error] = "this order was already confirmed"
+      flash[:error] = "This order has already been confirmed and can no longer take changes."
       redirect_to orders_path
       return
     end
 
-    if @order.nil?
-      head :not_found
-      return
-    elsif @order.order_items.empty?
-      flash.now[:error] = "can not make an order if cart empty"
-      render :edit
+    if @order.order_items.empty?
+      flash[:error] = "You don't have any items in your cart. Add some items to your cart first!"
+      redirect_to products_path
       return
     elsif @order.update(order_params)
       @order.order_purchase
       # clear session order id
       session[:order_id] = nil
-      flash[:success] = "Successfully made an order #{@order}"
+      flash[:success] = "Successfully made an order #{@order.id}"
       # TODO make confirmation page
       redirect_to status_path(@order.id)
       return
@@ -110,30 +98,31 @@ class OrdersController < ApplicationController
   end
 
   def cancel_order
-    @order = Order.find_by(id: params[:id])
-    if @order.nil?
-      flash[:error] = "The order does not exist"
-      redirect_to root_path
-    end
-
     @order.cancel_order_inventory
 
     return redirect_to current_merchant_path
   end
 
   def complete_order
-    @order = Order.find_by(id: params[:id])
-    if @order.nil?
-      flash[:error] = "The order does not exist"
-      redirect_to root_path
-    end
-
     @order.status = "complete"
     @order.save!
+
+    flash[:success] = "Successfully made an order #{@order}"
     return redirect_to current_merchant_path
   end
 
+  private
+
   def order_params
     return params.require(:order).permit(:name, :email, :address, :credit_card, :credit_card_exp, :status)
+  end
+
+  def find_order
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      flash[:error] = "You haven't started an order yet. Add some items to your cart first!"
+      redirect_to products_path
+      return
+    end
   end
 end
