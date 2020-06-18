@@ -3,13 +3,7 @@
 <%= render "shared/sidebar"%>
 <section class="main_w_sidebar container-fluid m5">
 
-  <section class="alert__container">
-    <%flash.each do |name, message|%>
-      <div class="alert <%= name %>">
-        <%=message%>
-      </div>
-    <%end%>
-  </section>
+  <%= render "shared/flash"%>
 
   <h1 id="top" class="product__all__header">
     All Art <span class="product__count">(<%= Product.where('inventory > ?', 0).length %> products)</span>

@@ -1,4 +1,5 @@
 <div class="full_page_main">
+  <%= render "shared/flash"%>
   <h2 style="padding-bottom: 20px;">Hello <%= @merchant.username %>!
   <small>Member since: <%= @merchant.created_at.strftime("%b %d, %Y") %></small>
   </h2>

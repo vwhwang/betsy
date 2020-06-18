@@ -1,4 +1,6 @@
 <div class="full_page_main container-fluid m5">
+    <%= render "shared/flash"%>
+    
     <% if session[:merchant_id]%>
         <h3>Edit <%= @product.name %></h3>
         <%= render partial: "form", locals: {action_name: "Update"}%>

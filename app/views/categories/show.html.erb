@@ -1,6 +1,8 @@
 
 <%= render "shared/sidebar"%>
 <section class="main_w_sidebar container-fluid m5">
+  <%= render "shared/flash"%>
+  
   <h1 id="top" class="product__all__header">
     <%= @category.name %> <span class="product__count">(<%= @category.products.where('inventory > ?', 0).length %> products)</span>
   </h1>
