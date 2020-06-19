@@ -36,7 +36,7 @@
         <%end%>
       <% end %>
 
-      <%# TODO: link to category pages %>
+
       <p class="font-italic">
         <% @product.categories.each do |category| %>
           <%= link_to "#{category.name}", category_path(category.id), class:"" %>

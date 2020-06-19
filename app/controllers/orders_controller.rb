@@ -9,11 +9,11 @@ class OrdersController < ApplicationController
 
   def create
     if session[:order_id]
-      # TODO confused by what this is doing
+
       @order = Order.new(order_params)
     else
       @order = Order.new
-      # TODO why is session[:order_id] set here and also on line 22?
+
       session[:order_id] = @order.id
     end
 
@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
       # clear session order id
       session[:order_id] = nil
       flash[:success] = "Successfully made an order #{@order.id}"
-      # TODO make confirmation page
+
       redirect_to status_path(@order.id)
       return
     else

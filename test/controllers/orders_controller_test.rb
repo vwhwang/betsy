@@ -41,15 +41,7 @@ describe OrdersController do
     end
   end
 
-  describe "manage" do
-    it "will return error and redirect if no order exists" do
-      # TODO figure out how to make this work
-      # get orders_manage_path(1)
 
-      # expect(flash(:error)).must_equal "The order does not exist"
-      # must_redirect_to root_path
-    end
-  end
 
   describe "edit" do
     it "responds with success for valid product" do

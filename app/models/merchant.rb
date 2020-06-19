@@ -10,10 +10,7 @@ class Merchant < ApplicationRecord
     merchant.provider = "github"
     merchant.username = auth_hash["info"]["nickname"]
     merchant.email = auth_hash["info"]["email"]
-    # merchant.profile_img = auth_hash["info"]["image"]
 
-    # Note that the merchant has not been saved.
-    # We'll choose to do the saving outside of this method
     return merchant
   end
 

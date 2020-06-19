@@ -114,6 +114,5 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
     return params.require(:order_item).permit(:quantity, :order_id, :product_id)
-    # return params.require(:order_item).permit(:product_id).merge(quantity: @quantity, order_id: @order_id)
   end
 end
